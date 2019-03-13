@@ -65,9 +65,7 @@ public class Controller {
                         openFranchisee.setVisible(true);                        
                         break;
                     case "Foreperson":
-                        
-                        
-                        
+
                         break;
                     case "Mechanic":
                         System.out.println("Mechanic has logged in");
@@ -116,13 +114,14 @@ public class Controller {
         return null;
         
     }
-        public static boolean addStaff(String firstName, String surname, String email, String password, String jobTitle){
-        JOptionPane.showMessageDialog(null,"AAAA" ,  "Try again ", JOptionPane.WARNING_MESSAGE);
-            String addStaff = conn.addStaff(firstName, surname, email, password, jobTitle);
+       // addStaff(String staffID, String firstName, String lastName, String role, String password, String email)
+        public static boolean addStaff(String staffID, String firstName, String lastName, String role, String password, String email){
+            System.err.println("Attempting to AddStaff @controller class");
+            
+            String addStaff = conn.addStaff(staffID, firstName, lastName, role, password, email);
             JOptionPane.showMessageDialog(null,addStaff ,  "Try again ", JOptionPane.WARNING_MESSAGE);
             if (addStaff.equals("done")){
-                System.out.println("DONEEEEEEEEEEEEE");
-                
+                System.err.println("Staff has been added to the database!");
              return true;
             }else {
                 return false;

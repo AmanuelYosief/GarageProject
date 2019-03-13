@@ -22,7 +22,7 @@ public class MyDBConnection implements DBConnection {
     Statement stm;
     PreparedStatement pstm;
     ResultSet rs;
-     String DatabaseURL = "jdbc:sqlite:C://Users/amenu/OneDrive/Documents/NetbeansProjects/Garage IT System/database/sqlite/db/Garage Database.db";
+     String DatabaseURL = "jdbc:sqlite:C://Users/amenu/OneDrive/Documents/NetbeansProjects/GarageProject/sqlite/db/GarageDatabase.db";
 
     @Override
         public ResultSet login(String username, String password) throws SQLException {
@@ -85,27 +85,27 @@ public class MyDBConnection implements DBConnection {
     }
 
     @Override
-    public String addStaff(String firstName, String surname, String email, String password, String jobTitle) {
-        System.out.println("1");
+    public String addStaff(String staffID, String firstName, String lastName, String role, String password, String email) {
+        System.err.println("Attempting to AddStaff");
+        // INSERT INTO Staff(staffID, staffFirstName, staffLastName, staffRole, password, staffEmail) VALUES (1, "Amanuel", "Henry", "Administrator", 55, "amanuel55@gmail.com");
         try {
             pstm.close();
             rs.close();
             conn = DriverManager.getConnection(DatabaseURL);
-               System.out.println("2");
-            pstm = conn.prepareStatement("INSERT INTO staff(password, firstName, surname, email, jobTitle) VALUES (?,?,?,?,?)");
-               System.out.println("3");
-            pstm.setString(1, password);
+            System.err.println("Prior Insert Query");
+            pstm = conn.prepareStatement("INSERT INTO Staff(staffID, staffFirstName, staffLastName, staffRole, password, staffEmail) VALUES (?,?,?,?,?,?)");
+            System.err.println("After Insert Query");
+            pstm.setString(1, staffID);
             pstm.setString(2, firstName);
-            pstm.setString(3, surname);
-            pstm.setString(4, email);
-            pstm.setString(5, jobTitle);
-            System.out.println("");
-            System.out.print(conn.toString() + "\n" + pstm.toString() + "\n" + rs.toString());
+            pstm.setString(3, lastName);
+            pstm.setString(4, role);
+            pstm.setString(5, password);
+            pstm.setString(6, email);
+            System.err.print(conn.toString() + "\n" + pstm.toString() + "\n" + rs.toString());
             pstm.execute();
-             
             return "done";
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, ex.toString(),  "SQL Exceptionzzzzzzzzzz", JOptionPane.WARNING_MESSAGE);
+           JOptionPane.showMessageDialog(null, ex.toString(),  "SQL Insert Exception", JOptionPane.WARNING_MESSAGE);
         }
 
 

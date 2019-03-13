@@ -16,7 +16,7 @@ public interface DBConnection {
   
     void closeDBConnection() throws SQLException;
     ResultSet login(String username, String password) throws SQLException;
-    String addStaff(String firstName, String surname, String email, String password, String jobTitle);
+    String addStaff(String staffID, String firstName, String lastName, String role, String password, String email);
     ResultSet displayAllStaff() throws SQLException;
     public ResultSet searchAllStaff(String value) throws SQLException;
        

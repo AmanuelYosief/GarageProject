@@ -76,7 +76,7 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <Component id="btnUpdateStaff" alignment="1" min="-2" pref="118" max="-2" attributes="0"/>
+                              <Component id="btnAddStaff" alignment="1" min="-2" pref="118" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
@@ -103,7 +103,6 @@
                           <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblFirstname" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="txtFirstname" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
@@ -124,7 +123,7 @@
                       <Component id="cbJobRole" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnUpdateStaff" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="btnAddStaff" min="-2" pref="50" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -240,13 +239,16 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="btnUpdateStaff">
+        <Component class="javax.swing.JButton" name="btnAddStaff">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Add Staff"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddStaffActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
