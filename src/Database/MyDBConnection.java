@@ -85,7 +85,7 @@ public class MyDBConnection implements DBConnection {
     }
 
     @Override
-    public String addStaff(String staffID, String firstName, String lastName, String role, String password, String email) {
+    public boolean addStaff(String staffID, String firstName, String lastName, String role, String password, String email) {
         System.err.println("Attempting to AddStaff");
         // INSERT INTO Staff(staffID, staffFirstName, staffLastName, staffRole, password, staffEmail) VALUES (1, "Amanuel", "Henry", "Administrator", 55, "amanuel55@gmail.com");
         try {
@@ -103,7 +103,7 @@ public class MyDBConnection implements DBConnection {
             pstm.setString(6, email);
             System.err.print(conn.toString() + "\n" + pstm.toString() + "\n" + rs.toString());
             pstm.execute();
-            return "done";
+            return true;
         } catch (SQLException ex) {
            JOptionPane.showMessageDialog(null, ex.toString(),  "SQL Insert Exception", JOptionPane.WARNING_MESSAGE);
         }
@@ -114,16 +114,67 @@ public class MyDBConnection implements DBConnection {
 
     @Override
     public void closeDBConnection() throws SQLException {
-
+        // CLOSE Connection AT THE END
         System.out.print("The connection has been closedLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
         System.out.print(conn.toString() + "\n" + pstm.toString() + "\n" + rs.toString());
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public boolean deleteStaff(String staffID) {
+        
+         System.err.println("Attempting to Delete Staff");
+        try {
+            pstm.close();
+            rs.close();
+            conn = DriverManager.getConnection(DatabaseURL);
+            System.err.println("Prior Delete Query");
+            // DELETE FROM Staff WHERE staffID = 7;
+            pstm = conn.prepareStatement("DELETE FROM Staff WHERE StaffID = ?");
+            System.err.println("After Delete Query");
+            pstm.setString(1, staffID);
+            System.err.print(conn.toString() + "\n" + pstm.toString() + "\n" + rs.toString());
+            pstm.execute();
+            return true;
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, ex.toString(),  "SQL Delete Exception", JOptionPane.WARNING_MESSAGE);
+        }           
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean updateStaff(String staffID, String firstName, String lastName, String role, String email) {
+        
+         System.err.println("Attempting to Update Staff");
+        try {
+            pstm.close();
+            rs.close();
+            conn = DriverManager.getConnection(DatabaseURL);
+            System.err.println("Prior Update Query");
+            pstm = conn.prepareStatement("UPDATE Staff SET staffFirstName = ?, staffLastName = ?, staffRole = ?, staffEmail = ? WHERE StaffID = ?");
+            System.err.println("After Update Query");
+            pstm.setString(1, firstName);
+            pstm.setString(2, lastName);
+            pstm.setString(3, role);
+            pstm.setString(4, email);
+            pstm.setString(5, staffID);
+            
+            System.err.print(conn.toString() + "\n" + pstm.toString() + "\n" + rs.toString());
+            pstm.execute();
+            return true;
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, ex.toString(),  "SQL Update Exception", JOptionPane.WARNING_MESSAGE);
+        }           
+        
+        
+        
+        
+        
+        
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
+ 
     
-    
-    
-    
-    
-    
+
 }

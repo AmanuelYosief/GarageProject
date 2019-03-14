@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import Controller.Controller;
+import Controller.controller;
 import javax.swing.JOptionPane;
 
 /**
@@ -134,7 +134,7 @@ public class LoginForm extends javax.swing.JFrame {
             txtPassword.setText("");
         } else
         {
-            outcome = Controller.login(txtStaffID.getText(), passText);
+            outcome = controller.login(txtStaffID.getText(), passText);
             if (outcome == true){
                 setVisible(false);
                 txtStaffID.setText("");

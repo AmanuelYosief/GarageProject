@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import Controller.controller;
+import javax.swing.JOptionPane;
 /**
  *
  * @author amenu
@@ -172,18 +174,41 @@ public class AddStaffForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+boolean tryParseInt(String value) {
+        try {
+            Integer.parseInt(value);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public void EmptyFields() {
+             txtStaffID.setText("");
+            txtPassword.setText("");
+            txtFirstname.setText("");
+            txtSurname.setText("");
+            txtEmail.setText("");
+    }
 
     private void btnAddStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStaffActionPerformed
         // TODO add your handling code here:
-        
-              
-        
-        
-        
-        
-        
-        
-        
+        String passText = new String(txtPassword.getPassword());
+
+        if (txtStaffID.equals("") || passText.trim().equals("") || txtFirstname.equals("") || txtSurname.equals("") || txtEmail.equals("")) {
+            EmptyFields();
+            JOptionPane.showMessageDialog(null, "Make sure to fill in all the field and use correct types", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
+
+        } else {
+            if (tryParseInt(txtStaffID.getText().trim())) {
+               controller.addStaff(txtStaffID.getText().trim(), txtFirstname.getText().trim(), txtSurname.getText().trim(), cbJobRole.getSelectedItem().toString(), passText, txtEmail.getText().trim());
+                 EmptyFields();
+               
+            } else {
+                JOptionPane.showMessageDialog(null, "Staff ID can only have an integer value", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
+                txtStaffID.setText("");
+            }
+        }
     }//GEN-LAST:event_btnAddStaffActionPerformed
 
     /**

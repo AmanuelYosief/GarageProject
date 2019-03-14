@@ -5,6 +5,7 @@
  */
 package GUI;
 import Controller.*;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 import net.proteanit.sql.DbUtils;
 
@@ -24,10 +25,31 @@ public class AdministratorForm extends javax.swing.JFrame {
     }
     
     public void fetchAll() {
-   tblStaff.setModel(DbUtils.resultSetToTableModel(Controller.displayAllStaff()));
+   tblStaff.setModel(DbUtils.resultSetToTableModel(controller.displayAllStaff()));
        
         
     }
+    
+        public void emptyFields() {
+             txtStaffID.setText("");
+            txtFirstname.setText("");
+            txtSurname.setText("");
+            txtEmail.setText("");
+    }
+                public void disableFields() {
+            txtFirstname.enable(false);
+            txtSurname.enable(false);
+            txtEmail.enable(false);
+    }
+                public void enableFields(){
+                            txtFirstname.enable(true);
+            txtSurname.enable(true);
+            txtEmail.enable(true);
+                }
+
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -157,6 +179,7 @@ public class AdministratorForm extends javax.swing.JFrame {
         lblStaffID.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         lblStaffID.setText("Staff ID:");
 
+        txtStaffID.setEditable(false);
         txtStaffID.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
 
         lblFirstname.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
@@ -182,9 +205,19 @@ public class AdministratorForm extends javax.swing.JFrame {
 
         btnRemoveStaff.setBackground(new java.awt.Color(255, 255, 255));
         btnRemoveStaff.setText("Remove Staff");
+        btnRemoveStaff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveStaffActionPerformed(evt);
+            }
+        });
 
         btnUpdateStaff.setBackground(new java.awt.Color(255, 255, 255));
         btnUpdateStaff.setText("Update Staff");
+        btnUpdateStaff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateStaffActionPerformed(evt);
+            }
+        });
 
         lblDatabase.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
         lblDatabase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -367,7 +400,7 @@ public class AdministratorForm extends javax.swing.JFrame {
 
     private void btnAddStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStaffActionPerformed
         // TODO add your handling code here:
-        Controller.closeDBConnection();
+        controller.closeDBConnection();
         AddStaffForm openAddStaff = new AddStaffForm();
         openAddStaff.setLocationRelativeTo(null);
         openAddStaff.setResizable(false);
@@ -387,7 +420,7 @@ public class AdministratorForm extends javax.swing.JFrame {
         txtSurname.setText(tblStaff.getValueAt(tblStaff.getSelectedRow(), 2).toString());
         txtEmail.setText(tblStaff.getValueAt(tblStaff.getSelectedRow(), 4).toString());
         cbJobRole.getModel().setSelectedItem(tblStaff.getValueAt(tblStaff.getSelectedRow(), 3).toString());
-
+        enableFields();
     }//GEN-LAST:event_tblStaffMouseClicked
 
     private void tblStaffKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblStaffKeyPressed
@@ -414,8 +447,55 @@ public class AdministratorForm extends javax.swing.JFrame {
 
     private void txtSearchStaffKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchStaffKeyReleased
         // TODO add your handling code here:
-                tblStaff.setModel(DbUtils.resultSetToTableModel(Controller.searchAllStaff(txtSearchStaff.getText())));
+                tblStaff.setModel(DbUtils.resultSetToTableModel(controller.searchAllStaff(txtSearchStaff.getText())));
+                
+ 
     }//GEN-LAST:event_txtSearchStaffKeyReleased
+
+    private void btnRemoveStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveStaffActionPerformed
+        // TODO add your handling code here:
+        
+        int cd = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete this user?", "Delete User", JOptionPane.YES_NO_OPTION);
+        
+        if (cd == JOptionPane.YES_OPTION ){
+          controller.deleteStaff(txtStaffID.getText().trim());
+          JOptionPane.showMessageDialog(null, "Staff sucessfully deleted", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
+                  emptyFields();
+        disableFields();
+        fetchAll();
+        }
+        else if (cd == JOptionPane.NO_OPTION){
+        emptyFields();
+        disableFields();
+        fetchAll();
+        }
+        
+      
+    }//GEN-LAST:event_btnRemoveStaffActionPerformed
+
+    private void btnUpdateStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateStaffActionPerformed
+        // TODO add your handling code here:
+
+        int cd = JOptionPane.showConfirmDialog(null,"Are you sure you want to update this user?", "Update User", JOptionPane.YES_NO_OPTION);
+        
+        if (cd == JOptionPane.YES_OPTION ){
+            controller.updateStaff(txtStaffID.getText(), txtFirstname.getText().trim(), txtSurname.getText().trim(), cbJobRole.getSelectedItem().toString(), txtEmail.getText().trim());
+          JOptionPane.showMessageDialog(null, "Staff sucessfully updated!", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
+                  emptyFields();
+        disableFields();
+        fetchAll();
+        }
+        else if (cd == JOptionPane.NO_OPTION){
+        emptyFields();
+        disableFields();
+        fetchAll();
+        }
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_btnUpdateStaffActionPerformed
 
     /**
      * @param args the command line arguments
