@@ -36,8 +36,6 @@ public class customerPlusPanel extends javax.swing.JPanel {
         lblCustomerTitle = new javax.swing.JLabel();
         lblCustomerName = new javax.swing.JLabel();
         txtCustomerName = new javax.swing.JTextField();
-        lblCustomerEmail = new javax.swing.JLabel();
-        txtCustomerEmail = new javax.swing.JTextField();
         lblCustomerPhoneNumber = new javax.swing.JLabel();
         txtCustomerPhoneNumber = new javax.swing.JTextField();
         lblCustomerAddress = new javax.swing.JLabel();
@@ -46,7 +44,7 @@ public class customerPlusPanel extends javax.swing.JPanel {
         lblPostCode = new javax.swing.JLabel();
         txtCustomerPostCode = new javax.swing.JTextField();
         lblFaxNumber = new javax.swing.JLabel();
-        txtCustomerFax = new javax.swing.JTextField();
+        txtCustomerHomeNumber = new javax.swing.JTextField();
         lblPayLater = new javax.swing.JLabel();
         cbPayLater = new java.awt.Checkbox();
         lblDiscountPlan = new javax.swing.JLabel();
@@ -122,12 +120,6 @@ public class customerPlusPanel extends javax.swing.JPanel {
 
         txtCustomerName.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
 
-        lblCustomerEmail.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        lblCustomerEmail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCustomerEmail.setText("Email:");
-
-        txtCustomerEmail.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
-
         lblCustomerPhoneNumber.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         lblCustomerPhoneNumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCustomerPhoneNumber.setText("Phone Number:");
@@ -151,9 +143,9 @@ public class customerPlusPanel extends javax.swing.JPanel {
 
         lblFaxNumber.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         lblFaxNumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblFaxNumber.setText("Fax Number:");
+        lblFaxNumber.setText("Home Number:");
 
-        txtCustomerFax.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
+        txtCustomerHomeNumber.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
 
         lblPayLater.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         lblPayLater.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -214,16 +206,14 @@ public class customerPlusPanel extends javax.swing.JPanel {
                                 .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(cbDiscountPlan, 0, 200, Short.MAX_VALUE)
                                     .addComponent(cbPayLater, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCustomerFax, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                    .addComponent(txtCustomerHomeNumber, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerPanelLayout.createSequentialGroup()
                                 .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblCustomerName)
-                                    .addComponent(lblCustomerEmail)
                                     .addComponent(lblCustomerPhoneNumber))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtCustomerPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(txtCustomerEmail)
                                     .addComponent(txtCustomerName))))
                         .addGap(22, 22, 22))
                     .addGroup(customerPanelLayout.createSequentialGroup()
@@ -247,29 +237,33 @@ public class customerPlusPanel extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerPanelLayout.createSequentialGroup()
                         .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(customerPanelLayout.createSequentialGroup()
-                                .addGap(174, 174, 174)
+                                .addGap(8, 8, 8)
                                 .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(customerPanelLayout.createSequentialGroup()
-                                        .addGap(64, 64, 64)
-                                        .addComponent(lblPayLater)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblDiscountPlan))
-                                    .addGroup(customerPanelLayout.createSequentialGroup()
-                                        .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(customerPanelLayout.createSequentialGroup()
-                                                .addGap(68, 68, 68)
-                                                .addComponent(cbPayLater, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(customerPanelLayout.createSequentialGroup()
-                                                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(lblPostCode)
-                                                    .addComponent(txtCustomerPostCode, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(lblFaxNumber)
-                                                    .addComponent(txtCustomerFax, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cbDiscountPlan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(lblCustomerAddress)
+                                        .addGap(77, 77, 77))
+                                    .addComponent(scrollCustomeAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblCustomerPhoneNumber)
+                                    .addComponent(txtCustomerPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtCustomerPostCode, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblPostCode))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblFaxNumber)
+                                    .addComponent(txtCustomerHomeNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(cbPayLater, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblPayLater))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblDiscountPlan)
+                                    .addComponent(cbDiscountPlan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(39, 39, 39)
                                 .addComponent(btnUpdateCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(scrollTableCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE))
@@ -285,18 +279,6 @@ public class customerPlusPanel extends javax.swing.JPanel {
                 .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCustomerName)
                     .addComponent(txtCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCustomerEmail)
-                    .addComponent(txtCustomerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCustomerPhoneNumber)
-                    .addComponent(txtCustomerPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCustomerAddress)
-                    .addComponent(scrollCustomeAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -361,7 +343,6 @@ public class customerPlusPanel extends javax.swing.JPanel {
     private javax.swing.JPanel customerPanel;
     private javax.swing.JLabel lblCompanyLogo;
     private javax.swing.JLabel lblCustomerAddress;
-    private javax.swing.JLabel lblCustomerEmail;
     private javax.swing.JLabel lblCustomerName;
     private javax.swing.JLabel lblCustomerPhoneNumber;
     private javax.swing.JLabel lblCustomerTitle;
@@ -374,8 +355,7 @@ public class customerPlusPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane scrollTableCustomer;
     private javax.swing.JTable tblCustomer;
     private javax.swing.JTextArea txtCustomerAddress;
-    private javax.swing.JTextField txtCustomerEmail;
-    private javax.swing.JTextField txtCustomerFax;
+    private javax.swing.JTextField txtCustomerHomeNumber;
     private javax.swing.JTextField txtCustomerName;
     private javax.swing.JTextField txtCustomerPhoneNumber;
     private javax.swing.JTextField txtCustomerPostCode;

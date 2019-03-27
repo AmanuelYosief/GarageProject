@@ -2,6 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/Database/DBConnection.java</file>
+            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/AdministratorForm.java</file>
+            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/Panels/jobPanel.java</file>
+            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/Controller/controller.java</file>
+            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/LoginForm.java</file>
+            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/Panels/customerPlusPanel.java</file>
+            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/Panels/customerPanel.java</file>
+            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/Database/MyDBConnection.java</file>
+        </group>
     </open-files>
 </project-private>

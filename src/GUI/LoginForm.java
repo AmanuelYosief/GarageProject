@@ -33,7 +33,7 @@ public class LoginForm extends javax.swing.JFrame {
         loginPanel = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
         lblLoginIcon = new javax.swing.JLabel();
-        txtStaffID = new javax.swing.JTextField();
+        txtStaffLogin = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
         lblCompanyLogo = new javax.swing.JLabel();
@@ -50,8 +50,10 @@ public class LoginForm extends javax.swing.JFrame {
 
         lblLoginIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/loginIcon.png"))); // NOI18N
 
-        txtStaffID.setNextFocusableComponent(txtPassword);
+        txtStaffLogin.setText("Penelop");
+        txtStaffLogin.setNextFocusableComponent(txtPassword);
 
+        txtPassword.setText("PinkMobile");
         txtPassword.setNextFocusableComponent(btnLogin);
 
         btnLogin.setBackground(new java.awt.Color(255, 255, 255));
@@ -80,7 +82,7 @@ public class LoginForm extends javax.swing.JFrame {
                     .addGroup(loginPanelLayout.createSequentialGroup()
                         .addGap(286, 286, 286)
                         .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtStaffID)
+                            .addComponent(txtStaffLogin)
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnLogin)
@@ -100,7 +102,7 @@ public class LoginForm extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(loginPanelLayout.createSequentialGroup()
-                        .addComponent(txtStaffID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtStaffLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -128,19 +130,20 @@ public class LoginForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         String passText = new String(txtPassword.getPassword());
         boolean outcome;
-        if (txtStaffID.getText().equals("") || passText.equals("")){
+        if (txtStaffLogin.getText().equals("") || passText.equals("")){
             JOptionPane.showMessageDialog(null, "Please provide both Username and Password",  "Empty Fields ", JOptionPane.WARNING_MESSAGE);
-            txtStaffID.setText("");
+            txtStaffLogin.setText("");
             txtPassword.setText("");
         } else
         {
-            outcome = controller.login(txtStaffID.getText(), passText);
+            JOptionPane.showMessageDialog(null, txtStaffLogin.getText() + "  Password:" + passText,  "Empty Fields ", JOptionPane.WARNING_MESSAGE);
+            outcome = controller.login(txtStaffLogin.getText(), passText);
             if (outcome == true){
                 setVisible(false);
-                txtStaffID.setText("");
+                txtStaffLogin.setText("");
                 txtPassword.setText("");
             } else if (outcome == false)
-                txtStaffID.setText("");
+                txtStaffLogin.setText("");
                 txtPassword.setText("");
 
         }
@@ -188,6 +191,6 @@ public class LoginForm extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JPasswordField txtPassword;
-    private javax.swing.JTextField txtStaffID;
+    private javax.swing.JTextField txtStaffLogin;
     // End of variables declaration//GEN-END:variables
 }

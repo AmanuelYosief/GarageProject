@@ -60,6 +60,8 @@ public class ReceptionistForm extends javax.swing.JFrame {
         lblTitle.setText("Receptionist Dashboard");
 
         tabbedReceptionistPanel.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
+        tabbedReceptionistPanel.setMinimumSize(new java.awt.Dimension(1100, 662));
+        tabbedReceptionistPanel.setPreferredSize(new java.awt.Dimension(1100, 662));
 
         javax.swing.GroupLayout receptionistPanelLayout = new javax.swing.GroupLayout(receptionistPanel);
         receptionistPanel.setLayout(receptionistPanelLayout);
@@ -69,7 +71,7 @@ public class ReceptionistForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(tabbedReceptionistPanel)
+            .addComponent(tabbedReceptionistPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         receptionistPanelLayout.setVerticalGroup(
             receptionistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

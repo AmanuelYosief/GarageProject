@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import Controller.controller;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author amenu
@@ -31,8 +34,6 @@ public class AddCustomerForm extends javax.swing.JFrame {
         lblTitle = new javax.swing.JLabel();
         lblCustomerName = new javax.swing.JLabel();
         txtCustomerName = new javax.swing.JTextField();
-        lblCustomerEmail = new javax.swing.JLabel();
-        txtCustomerEmail = new javax.swing.JTextField();
         lblCustomerPhoneNumber = new javax.swing.JLabel();
         txtCustomerPhoneNumber = new javax.swing.JTextField();
         lblCustomerAddress = new javax.swing.JLabel();
@@ -40,8 +41,8 @@ public class AddCustomerForm extends javax.swing.JFrame {
         txtCustomerAddress = new javax.swing.JTextArea();
         lblPostCode = new javax.swing.JLabel();
         txtCustomerPostCode = new javax.swing.JTextField();
-        lblFaxNumber = new javax.swing.JLabel();
-        txtCustomerFax = new javax.swing.JTextField();
+        lblHomeNumber = new javax.swing.JLabel();
+        txtCustomerHomeNumber = new javax.swing.JTextField();
         btnAddCustomer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,12 +60,6 @@ public class AddCustomerForm extends javax.swing.JFrame {
 
         txtCustomerName.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
 
-        lblCustomerEmail.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        lblCustomerEmail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCustomerEmail.setText("Email:");
-
-        txtCustomerEmail.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
-
         lblCustomerPhoneNumber.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         lblCustomerPhoneNumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCustomerPhoneNumber.setText("Phone Number:");
@@ -75,7 +70,6 @@ public class AddCustomerForm extends javax.swing.JFrame {
         lblCustomerAddress.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCustomerAddress.setText("Address:");
 
-        txtCustomerAddress.setEditable(false);
         txtCustomerAddress.setColumns(20);
         txtCustomerAddress.setRows(5);
         scrollCustomerAddress.setViewportView(txtCustomerAddress);
@@ -86,11 +80,11 @@ public class AddCustomerForm extends javax.swing.JFrame {
 
         txtCustomerPostCode.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
 
-        lblFaxNumber.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        lblFaxNumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblFaxNumber.setText("Fax Number:");
+        lblHomeNumber.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        lblHomeNumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHomeNumber.setText("Home Number:");
 
-        txtCustomerFax.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
+        txtCustomerHomeNumber.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
 
         btnAddCustomer.setBackground(new java.awt.Color(255, 255, 255));
         btnAddCustomer.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
@@ -117,29 +111,27 @@ public class AddCustomerForm extends javax.swing.JFrame {
                             .addComponent(btnAddCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(addCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(addCustomerPanelLayout.createSequentialGroup()
-                                    .addComponent(lblFaxNumber)
+                                    .addComponent(lblHomeNumber)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtCustomerFax, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(addCustomerPanelLayout.createSequentialGroup()
-                                    .addComponent(lblPostCode)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtCustomerPostCode, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtCustomerHomeNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(addCustomerPanelLayout.createSequentialGroup()
                                     .addComponent(lblCustomerPhoneNumber)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                                     .addComponent(txtCustomerPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addCustomerPanelLayout.createSequentialGroup()
-                                    .addComponent(lblCustomerEmail)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtCustomerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(addCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblCustomerName)
+                                        .addComponent(lblCustomerAddress))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(addCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(addCustomerPanelLayout.createSequentialGroup()
+                                            .addGap(0, 0, Short.MAX_VALUE)
+                                            .addComponent(txtCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(scrollCustomerAddress)))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addCustomerPanelLayout.createSequentialGroup()
-                                    .addComponent(lblCustomerName)
+                                    .addComponent(lblPostCode)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(addCustomerPanelLayout.createSequentialGroup()
-                                    .addComponent(lblCustomerAddress)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(scrollCustomerAddress))))
+                                    .addComponent(txtCustomerPostCode, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -153,14 +145,6 @@ public class AddCustomerForm extends javax.swing.JFrame {
                     .addComponent(lblCustomerName)
                     .addComponent(txtCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(addCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCustomerEmail)
-                    .addComponent(txtCustomerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(addCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblCustomerPhoneNumber)
-                    .addComponent(txtCustomerPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(addCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCustomerAddress)
                     .addComponent(scrollCustomerAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -168,13 +152,17 @@ public class AddCustomerForm extends javax.swing.JFrame {
                 .addGroup(addCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblPostCode)
                     .addComponent(txtCustomerPostCode, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(addCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCustomerPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCustomerPhoneNumber))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(addCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblFaxNumber)
-                    .addComponent(txtCustomerFax, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblHomeNumber)
+                    .addComponent(txtCustomerHomeNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAddCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -193,6 +181,14 @@ public class AddCustomerForm extends javax.swing.JFrame {
 
     private void btnAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustomerActionPerformed
         // TODO add your handling code here:
+        
+
+        if (txtCustomerName.equals("") || txtCustomerAddress.equals("") || txtCustomerPostCode.equals("") || txtCustomerPhoneNumber.equals("") || txtCustomerHomeNumber.equals("")) {
+            JOptionPane.showMessageDialog(null, "Make sure to fill in all the field and use correct types", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
+
+        } else {
+               controller.addCustomer(txtCustomerName.getText().trim(), txtCustomerAddress.getText().trim(), txtCustomerPostCode.getText().trim(), txtCustomerPhoneNumber.getText().trim() ,txtCustomerHomeNumber.getText().trim());
+        }
     }//GEN-LAST:event_btnAddCustomerActionPerformed
 
     /**
@@ -241,16 +237,14 @@ public class AddCustomerForm extends javax.swing.JFrame {
     private javax.swing.JPanel addCustomerPanel;
     private javax.swing.JButton btnAddCustomer;
     private javax.swing.JLabel lblCustomerAddress;
-    private javax.swing.JLabel lblCustomerEmail;
     private javax.swing.JLabel lblCustomerName;
     private javax.swing.JLabel lblCustomerPhoneNumber;
-    private javax.swing.JLabel lblFaxNumber;
+    private javax.swing.JLabel lblHomeNumber;
     private javax.swing.JLabel lblPostCode;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JScrollPane scrollCustomerAddress;
     private javax.swing.JTextArea txtCustomerAddress;
-    private javax.swing.JTextField txtCustomerEmail;
-    private javax.swing.JTextField txtCustomerFax;
+    private javax.swing.JTextField txtCustomerHomeNumber;
     private javax.swing.JTextField txtCustomerName;
     private javax.swing.JTextField txtCustomerPhoneNumber;
     private javax.swing.JTextField txtCustomerPostCode;

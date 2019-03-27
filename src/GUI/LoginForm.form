@@ -61,7 +61,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="286" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtStaffID" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtStaffLogin" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtPassword" alignment="0" min="-2" pref="222" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -87,7 +87,7 @@
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="txtStaffID" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtStaffLogin" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txtPassword" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -120,8 +120,9 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtStaffID">
+        <Component class="javax.swing.JTextField" name="txtStaffLogin">
           <Properties>
+            <Property name="text" type="java.lang.String" value="Penelop"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="txtPassword"/>
             </Property>
@@ -129,6 +130,7 @@
         </Component>
         <Component class="javax.swing.JPasswordField" name="txtPassword">
           <Properties>
+            <Property name="text" type="java.lang.String" value="PinkMobile"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="btnLogin"/>
             </Property>

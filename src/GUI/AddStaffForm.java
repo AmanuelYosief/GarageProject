@@ -31,16 +31,12 @@ public class AddStaffForm extends javax.swing.JFrame {
 
         addStaffPanel = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
-        lblStaffID = new javax.swing.JLabel();
-        txtStaffID = new javax.swing.JTextField();
+        lblLogin = new javax.swing.JLabel();
+        txtLogin = new javax.swing.JTextField();
         lblPassword = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
-        lblFirstname = new javax.swing.JLabel();
-        txtFirstname = new javax.swing.JTextField();
-        lblSurname = new javax.swing.JLabel();
-        txtSurname = new javax.swing.JTextField();
-        lblEmail = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
+        lblName = new javax.swing.JLabel();
+        txtName = new javax.swing.JTextField();
         lblJobRole = new javax.swing.JLabel();
         cbJobRole = new javax.swing.JComboBox<>();
         btnAddStaff = new javax.swing.JButton();
@@ -54,28 +50,18 @@ public class AddStaffForm extends javax.swing.JFrame {
         lblTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/userIcon.png"))); // NOI18N
         lblTitle.setText("Add Staff");
 
-        lblStaffID.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        lblStaffID.setText("Staff ID:");
+        lblLogin.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        lblLogin.setText("Staff Login:");
 
-        txtStaffID.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
+        txtLogin.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
 
         lblPassword.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         lblPassword.setText("Staff password");
 
-        lblFirstname.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        lblFirstname.setText("Firstname:");
+        lblName.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        lblName.setText("Name:");
 
-        txtFirstname.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
-
-        lblSurname.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        lblSurname.setText("Surname:");
-
-        txtSurname.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
-
-        lblEmail.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        lblEmail.setText("Email:");
-
-        txtEmail.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
+        txtName.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
 
         lblJobRole.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         lblJobRole.setText("Job Role:");
@@ -104,22 +90,18 @@ public class AddStaffForm extends javax.swing.JFrame {
                         .addGap(103, 103, 103)
                         .addGroup(addStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(addStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblSurname)
-                                .addComponent(lblFirstname)
+                                .addComponent(lblName)
                                 .addComponent(lblJobRole)
-                                .addComponent(lblEmail)
                                 .addGroup(addStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(addStaffPanelLayout.createSequentialGroup()
-                                        .addComponent(lblStaffID)
+                                        .addComponent(lblLogin)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                                        .addComponent(txtStaffID, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, addStaffPanelLayout.createSequentialGroup()
                                         .addComponent(lblPassword)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(addStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtFirstname, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                            .addComponent(txtSurname, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                            .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                                             .addComponent(cbJobRole, 0, 250, Short.MAX_VALUE)
                                             .addComponent(txtPassword)))))
                             .addComponent(btnAddStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -133,8 +115,8 @@ public class AddStaffForm extends javax.swing.JFrame {
                 .addComponent(lblTitle)
                 .addGap(18, 18, 18)
                 .addGroup(addStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblStaffID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtStaffID, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(addStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -142,17 +124,9 @@ public class AddStaffForm extends javax.swing.JFrame {
                         .addComponent(txtPassword)
                         .addGap(1, 1, 1)))
                 .addGroup(addStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(addStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(addStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(72, 72, 72)
                 .addGroup(addStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblJobRole, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbJobRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -184,30 +158,23 @@ boolean tryParseInt(String value) {
     }
 
     public void EmptyFields() {
-             txtStaffID.setText("");
+             txtLogin.setText("");
             txtPassword.setText("");
-            txtFirstname.setText("");
-            txtSurname.setText("");
-            txtEmail.setText("");
+            txtName.setText("");
     }
 
     private void btnAddStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStaffActionPerformed
         // TODO add your handling code here:
         String passText = new String(txtPassword.getPassword());
 
-        if (txtStaffID.equals("") || passText.trim().equals("") || txtFirstname.equals("") || txtSurname.equals("") || txtEmail.equals("")) {
+        if (txtLogin.equals("") || passText.trim().equals("") || txtName.equals("")) {
             EmptyFields();
             JOptionPane.showMessageDialog(null, "Make sure to fill in all the field and use correct types", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
 
         } else {
-            if (tryParseInt(txtStaffID.getText().trim())) {
-               controller.addStaff(txtStaffID.getText().trim(), txtFirstname.getText().trim(), txtSurname.getText().trim(), cbJobRole.getSelectedItem().toString(), passText, txtEmail.getText().trim());
+
+               controller.addStaff(txtName.getText().trim(),  cbJobRole.getSelectedItem().toString(), txtLogin.getText().trim(),  passText);
                  EmptyFields();
-               
-            } else {
-                JOptionPane.showMessageDialog(null, "Staff ID can only have an integer value", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
-                txtStaffID.setText("");
-            }
         }
     }//GEN-LAST:event_btnAddStaffActionPerformed
 
@@ -236,22 +203,6 @@ boolean tryParseInt(String value) {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(AddStaffForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -265,17 +216,13 @@ boolean tryParseInt(String value) {
     private javax.swing.JPanel addStaffPanel;
     private javax.swing.JButton btnAddStaff;
     private javax.swing.JComboBox<String> cbJobRole;
-    private javax.swing.JLabel lblEmail;
-    private javax.swing.JLabel lblFirstname;
     private javax.swing.JLabel lblJobRole;
+    private javax.swing.JLabel lblLogin;
+    private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPassword;
-    private javax.swing.JLabel lblStaffID;
-    private javax.swing.JLabel lblSurname;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtFirstname;
+    private javax.swing.JTextField txtLogin;
+    private javax.swing.JTextField txtName;
     private javax.swing.JPasswordField txtPassword;
-    private javax.swing.JTextField txtStaffID;
-    private javax.swing.JTextField txtSurname;
     // End of variables declaration//GEN-END:variables
 }

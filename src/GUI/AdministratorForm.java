@@ -25,26 +25,19 @@ public class AdministratorForm extends javax.swing.JFrame {
     }
     
     public void fetchAll() {
-   tblStaff.setModel(DbUtils.resultSetToTableModel(controller.displayAllStaff()));
-       
-        
+        tblStaff.setModel(DbUtils.resultSetToTableModel(controller.displayStaff()));
     }
     
         public void emptyFields() {
-             txtStaffID.setText("");
-            txtFirstname.setText("");
-            txtSurname.setText("");
-            txtEmail.setText("");
+             txtLogin.setText("");
+            txtName.setText("");
     }
                 public void disableFields() {
-            txtFirstname.enable(false);
-            txtSurname.enable(false);
-            txtEmail.enable(false);
+            txtName.enable(false);
+
     }
                 public void enableFields(){
-                            txtFirstname.enable(true);
-            txtSurname.enable(true);
-            txtEmail.enable(true);
+                            txtName.enable(true);
                 }
 
     
@@ -68,14 +61,10 @@ public class AdministratorForm extends javax.swing.JFrame {
         scrollTableStaff = new javax.swing.JScrollPane();
         tblStaff = new javax.swing.JTable();
         lblStaffDetails = new javax.swing.JLabel();
-        lblStaffID = new javax.swing.JLabel();
-        txtStaffID = new javax.swing.JTextField();
-        lblFirstname = new javax.swing.JLabel();
-        txtFirstname = new javax.swing.JTextField();
-        lblSurname = new javax.swing.JLabel();
-        txtSurname = new javax.swing.JTextField();
-        lblEmail = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
+        lblLogin = new javax.swing.JLabel();
+        txtLogin = new javax.swing.JTextField();
+        lblName = new javax.swing.JLabel();
+        txtName = new javax.swing.JTextField();
         lblJobRole = new javax.swing.JLabel();
         cbJobRole = new javax.swing.JComboBox<>();
         btnRemoveStaff = new javax.swing.JButton();
@@ -129,17 +118,17 @@ public class AdministratorForm extends javax.swing.JFrame {
         tblStaff.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         tblStaff.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Staff ID", "Firstname", "Surname", "Email", "Job Role"
+                "Name", "Job Role", "Username"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -166,36 +155,22 @@ public class AdministratorForm extends javax.swing.JFrame {
             }
         });
         scrollTableStaff.setViewportView(tblStaff);
-        if (tblStaff.getColumnModel().getColumnCount() > 0) {
-            tblStaff.getColumnModel().getColumn(0).setResizable(false);
-            tblStaff.getColumnModel().getColumn(4).setResizable(false);
-        }
 
         lblStaffDetails.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
         lblStaffDetails.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblStaffDetails.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/userIcon.png"))); // NOI18N
         lblStaffDetails.setText("Staff Detail");
 
-        lblStaffID.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        lblStaffID.setText("Staff ID:");
+        lblLogin.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        lblLogin.setText("Login");
 
-        txtStaffID.setEditable(false);
-        txtStaffID.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
+        txtLogin.setEditable(false);
+        txtLogin.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
 
-        lblFirstname.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        lblFirstname.setText("Firstname:");
+        lblName.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        lblName.setText("Name");
 
-        txtFirstname.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
-
-        lblSurname.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        lblSurname.setText("Surname:");
-
-        txtSurname.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
-
-        lblEmail.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        lblEmail.setText("Email:");
-
-        txtEmail.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
+        txtName.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
 
         lblJobRole.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         lblJobRole.setText("Job Role:");
@@ -289,34 +264,28 @@ public class AdministratorForm extends javax.swing.JFrame {
                                         .addComponent(btnRemoveStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnUpdateStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, administratorPanelLayout.createSequentialGroup()
+                                        .addGroup(administratorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblName)
+                                            .addComponent(lblLogin))
+                                        .addGap(26, 26, 26)
+                                        .addGroup(administratorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, administratorPanelLayout.createSequentialGroup()
+                                        .addComponent(lblJobRole)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbJobRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(administratorPanelLayout.createSequentialGroup()
                                         .addGroup(administratorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(txtDatabaseURL)
                                             .addGroup(administratorPanelLayout.createSequentialGroup()
-                                                .addComponent(btnRestore, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(btnBackup, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(txtDatabaseURL))
+                                                .addComponent(btnRestore, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btnBackup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnBrowse, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, administratorPanelLayout.createSequentialGroup()
-                                        .addGroup(administratorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblJobRole)
-                                            .addComponent(lblEmail))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                                        .addGroup(administratorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cbJobRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, administratorPanelLayout.createSequentialGroup()
-                                        .addGroup(administratorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblSurname)
-                                            .addComponent(lblFirstname)
-                                            .addComponent(lblStaffID))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(administratorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtFirstname, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                            .addComponent(txtSurname, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                            .addComponent(txtStaffID, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(0, 25, Short.MAX_VALUE))
+                                        .addComponent(btnBrowse, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 56, Short.MAX_VALUE))
                             .addGroup(administratorPanelLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(administratorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,42 +313,35 @@ public class AdministratorForm extends javax.swing.JFrame {
                     .addGroup(administratorPanelLayout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addGroup(administratorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblStaffID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtStaffID, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(administratorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(administratorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(administratorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(administratorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblJobRole, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbJobRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(administratorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnUpdateStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRemoveStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(administratorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnRemoveStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUpdateStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
                         .addComponent(lblDatabase)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(administratorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnBrowse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtDatabaseURL, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(administratorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtDatabaseURL, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBrowse, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(administratorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(administratorPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(administratorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(administratorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(btnBackup, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnRestore, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, administratorPanelLayout.createSequentialGroup()
-                                .addGap(58, 58, 58)
+                                    .addComponent(btnRestore, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(administratorPanelLayout.createSequentialGroup()
+                                .addGap(0, 95, Short.MAX_VALUE)
                                 .addComponent(lblCompanyLogo)))))
                 .addContainerGap())
         );
@@ -415,11 +377,9 @@ public class AdministratorForm extends javax.swing.JFrame {
 
     private void tblStaffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblStaffMouseClicked
         // TODO add your handling code here:
-        txtStaffID.setText(tblStaff.getValueAt(tblStaff.getSelectedRow(), 0).toString());
-        txtFirstname.setText(tblStaff.getValueAt(tblStaff.getSelectedRow(), 1).toString());
-        txtSurname.setText(tblStaff.getValueAt(tblStaff.getSelectedRow(), 2).toString());
-        txtEmail.setText(tblStaff.getValueAt(tblStaff.getSelectedRow(), 4).toString());
-        cbJobRole.getModel().setSelectedItem(tblStaff.getValueAt(tblStaff.getSelectedRow(), 3).toString());
+        txtLogin.setText(tblStaff.getValueAt(tblStaff.getSelectedRow(), 2).toString());
+        txtName.setText(tblStaff.getValueAt(tblStaff.getSelectedRow(), 0).toString());
+        cbJobRole.getModel().setSelectedItem(tblStaff.getValueAt(tblStaff.getSelectedRow(), 1).toString());
         enableFields();
     }//GEN-LAST:event_tblStaffMouseClicked
 
@@ -447,7 +407,7 @@ public class AdministratorForm extends javax.swing.JFrame {
 
     private void txtSearchStaffKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchStaffKeyReleased
         // TODO add your handling code here:
-                tblStaff.setModel(DbUtils.resultSetToTableModel(controller.searchAllStaff(txtSearchStaff.getText())));
+                tblStaff.setModel(DbUtils.resultSetToTableModel(controller.searchStaff(txtSearchStaff.getText())));
                 
  
     }//GEN-LAST:event_txtSearchStaffKeyReleased
@@ -458,7 +418,7 @@ public class AdministratorForm extends javax.swing.JFrame {
         int cd = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete this user?", "Delete User", JOptionPane.YES_NO_OPTION);
         
         if (cd == JOptionPane.YES_OPTION ){
-          controller.deleteStaff(txtStaffID.getText().trim());
+          controller.deleteStaff(txtLogin.getText().trim());
           JOptionPane.showMessageDialog(null, "Staff sucessfully deleted", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
                   emptyFields();
         disableFields();
@@ -479,7 +439,7 @@ public class AdministratorForm extends javax.swing.JFrame {
         int cd = JOptionPane.showConfirmDialog(null,"Are you sure you want to update this user?", "Update User", JOptionPane.YES_NO_OPTION);
         
         if (cd == JOptionPane.YES_OPTION ){
-            controller.updateStaff(txtStaffID.getText(), txtFirstname.getText().trim(), txtSurname.getText().trim(), cbJobRole.getSelectedItem().toString(), txtEmail.getText().trim());
+            controller.updateStaff(txtName.getText().trim(), cbJobRole.getSelectedItem().toString(), txtLogin.getText());
           JOptionPane.showMessageDialog(null, "Staff sucessfully updated!", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
                   emptyFields();
         disableFields();
@@ -544,21 +504,17 @@ public class AdministratorForm extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLabel lblCompanyLogo;
     private javax.swing.JLabel lblDatabase;
-    private javax.swing.JLabel lblEmail;
-    private javax.swing.JLabel lblFirstname;
     private javax.swing.JLabel lblJobRole;
+    private javax.swing.JLabel lblLogin;
+    private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblStaffDetails;
-    private javax.swing.JLabel lblStaffID;
-    private javax.swing.JLabel lblSurname;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblsearchIcon;
     private javax.swing.JScrollPane scrollTableStaff;
     private javax.swing.JTable tblStaff;
     private javax.swing.JTextField txtDatabaseURL;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtFirstname;
+    private javax.swing.JTextField txtLogin;
+    private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtSearchStaff;
-    private javax.swing.JTextField txtStaffID;
-    private javax.swing.JTextField txtSurname;
     // End of variables declaration//GEN-END:variables
 }
