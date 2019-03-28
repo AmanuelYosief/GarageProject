@@ -18,66 +18,66 @@ import javax.swing.JOptionPane;
  * @author amanuel
  */
 public class MyDBConnection implements DBConnection {
+
     private static Connection conn;
     Statement stm;
     PreparedStatement pstm;
     ResultSet rs;
-     String DatabaseURL = "jdbc:sqlite:C://Users/amenu/OneDrive/Documents/NetbeansProjects/GarageProject/sqlite/db/Garage.db";
+    String DatabaseURL = "jdbc:sqlite:C://Users/amenu/OneDrive/Documents/NetbeansProjects/GarageProject/sqlite/db/Garage.db";
 
     @Override
-        public ResultSet login(String login, String password) throws SQLException {
-        
-            try {
+    public ResultSet login(String login, String password) throws SQLException {
+
+        try {
             conn = DriverManager.getConnection(DatabaseURL);
             pstm = conn.prepareStatement("SELECT * FROM staff WHERE login = ? AND password = ?"); //query to select the staff memebers dependednt on the login and password
             pstm.setString(1, login);
             pstm.setString(2, password);
-           
+
             rs = pstm.executeQuery(); // get the infor from database
             System.out.println("Login Executed");
             return rs;
 
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, ex.toString(),  "SQL Exception", JOptionPane.WARNING_MESSAGE);
-        } 
+            JOptionPane.showMessageDialog(null, ex.toString(), "SQL Exception", JOptionPane.WARNING_MESSAGE);
+        }
         throw new UnsupportedOperationException("Sorry not know please come later ");
 
     }
- 
+
     @Override
     public ResultSet displayStaff() throws SQLException {
-        
+
         try {
             conn = DriverManager.getConnection(DatabaseURL);
             stm = conn.createStatement();
             rs = stm.executeQuery("Select staffName, staffRole, login FROM Staff");
-                                   System.out.println("displayAllStaff Executed");
+            System.out.println("displayAllStaff Executed");
             return rs;
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, ex.toString(),  "SQL Exception", JOptionPane.WARNING_MESSAGE);        
+            JOptionPane.showMessageDialog(null, ex.toString(), "SQL Exception", JOptionPane.WARNING_MESSAGE);
         }
-
 
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public ResultSet searchStaff(String value) throws SQLException {
-        
+
         try {
             conn = DriverManager.getConnection(DatabaseURL);
             System.out.println(" SearchAll Staff connection established");
             pstm = conn.prepareStatement("Select staffName, staffRole, login FROM Staff WHERE staffName LIKE ? OR staffRole LIKE ? OR login LIKE ?");
-            pstm.setString(1,'%' + value + '%');
-            pstm.setString(2,'%' + value + '%');
-            pstm.setString(3,'%' + value + '%');
+            pstm.setString(1, '%' + value + '%');
+            pstm.setString(2, '%' + value + '%');
+            pstm.setString(3, '%' + value + '%');
             rs = pstm.executeQuery();
-             
+
             return rs;
-            
+
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.toString(),  "SQL Exception 1"  ,JOptionPane.WARNING_MESSAGE);
-        } 
+            JOptionPane.showMessageDialog(null, ex.toString(), "SQL Exception 1", JOptionPane.WARNING_MESSAGE);
+        }
 
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -100,7 +100,7 @@ public class MyDBConnection implements DBConnection {
             pstm.execute();
             return true;
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, ex.toString(),  "SQL Insert Exception", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.toString(), "SQL Insert Exception", JOptionPane.WARNING_MESSAGE);
         }
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -115,8 +115,8 @@ public class MyDBConnection implements DBConnection {
 
     @Override
     public boolean deleteStaff(String login) {
-        
-         System.err.println("Attempting to Delete Staff");
+
+        System.err.println("Attempting to Delete Staff");
         try {
             pstm.close();
             rs.close();
@@ -130,8 +130,8 @@ public class MyDBConnection implements DBConnection {
             pstm.execute();
             return true;
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, ex.toString(),  "SQL Delete Exception", JOptionPane.WARNING_MESSAGE);
-        }           
+            JOptionPane.showMessageDialog(null, ex.toString(), "SQL Delete Exception", JOptionPane.WARNING_MESSAGE);
+        }
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -157,7 +157,7 @@ public class MyDBConnection implements DBConnection {
         }
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public boolean addCustomer(String name, String address, String postCode, String phoneNumber, String homeNumber) {
         System.err.println("Attempting to Customer");
@@ -166,61 +166,76 @@ public class MyDBConnection implements DBConnection {
             rs.close();
             conn = DriverManager.getConnection(DatabaseURL);
             System.err.println("Prior Insert Query");
-            pstm = conn.prepareStatement("INSERT INTO Customer(name, address, postCode, phoneNumber,  homeNumber) VALUES (?,?,?,?,?)");
+            pstm = conn.prepareStatement("INSERT INTO Customer(name, address, postCode, phoneNumber,  homeNumber, payLater, discountID) VALUES (?,?,?,?,?,?,?)");
             System.err.println("After Insert Query");
             pstm.setString(1, name);
             pstm.setString(2, address);
             pstm.setString(3, postCode);
             pstm.setString(4, phoneNumber);
             pstm.setString(5, homeNumber);
+            pstm.setString(6, "N");
+            pstm.setString(7, "0");
             System.err.print(conn.toString() + "\n" + pstm.toString() + "\n" + rs.toString());
             pstm.execute();
             return true;
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, ex.toString(),  "SQL Insert Exception", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.toString(), "SQL Insert Exception", JOptionPane.WARNING_MESSAGE);
         }
         return false;
-       
-        
     }
-    
+
     @Override
     public ResultSet displayCustomer() throws SQLException {
-        
+
         try {
             conn = DriverManager.getConnection(DatabaseURL);
             stm = conn.createStatement();
-            rs = stm.executeQuery("Select customerID, name, address, postCode, phoneNumber, homeNumber FROM Customer");
-                                   System.out.println("displayAllStaff Executed");
+            rs = stm.executeQuery("Select customerID, name, address, postCode, phoneNumber, homeNumber, payLater FROM Customer");
+            System.out.println("displayAllStaff Executed");
             return rs;
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, ex.toString(),  "SQL Exception", JOptionPane.WARNING_MESSAGE);        
+            JOptionPane.showMessageDialog(null, ex.toString(), "SQL Exception", JOptionPane.WARNING_MESSAGE);
         }
 
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ResultSet selectCustomer() throws SQLException {
+
+        try {
+            conn = DriverManager.getConnection(DatabaseURL);
+            stm = conn.createStatement();
+            rs = stm.executeQuery("Select customerID, name, phoneNumber FROM Customer");
+            System.out.println("displayAllStaff Executed");
+            return rs;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.toString(), "SQL Exception", JOptionPane.WARNING_MESSAGE);
+        }
 
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public ResultSet searchCustomer(String value) throws SQLException {
-        
-         try {
+
+        try {
             conn = DriverManager.getConnection(DatabaseURL);
             System.out.println(" SearchAll Customer connection established");
             pstm = conn.prepareStatement("Select customerID ,name, address, postCode,phoneNumber,homeNumber FROM Customer WHERE customerID LIKE ? OR name LIKE ? OR address LIKE ? OR postCode LIKE ? OR phoneNumber LIKE ? OR homeNumber LIKE ?");
-            pstm.setString(1,'%' + value + '%');
-            pstm.setString(2,'%' + value + '%');
-            pstm.setString(3,'%' + value + '%');
-            pstm.setString(4,'%' + value + '%');
-            pstm.setString(5,'%' + value + '%');
-                        pstm.setString(6,'%' + value + '%');
+            pstm.setString(1, '%' + value + '%');
+            pstm.setString(2, '%' + value + '%');
+            pstm.setString(3, '%' + value + '%');
+            pstm.setString(4, '%' + value + '%');
+            pstm.setString(5, '%' + value + '%');
+            pstm.setString(6, '%' + value + '%');
             rs = pstm.executeQuery();
-             
+
             return rs;
-            
+
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.toString(),  "SQL Exception 1"  ,JOptionPane.WARNING_MESSAGE);
-        } 
+            JOptionPane.showMessageDialog(null, ex.toString(), "SQL Exception 1", JOptionPane.WARNING_MESSAGE);
+        }
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -231,7 +246,7 @@ public class MyDBConnection implements DBConnection {
         try {
             pstm.close();
             rs.close();
-           
+
             conn = DriverManager.getConnection(DatabaseURL);
             System.err.println("Prior Update Query");
             pstm = conn.prepareStatement("UPDATE Customer SET name = ?, address = ? , postCode = ?, phoneNumber = ?, homeNumber = ? WHERE customerID = ?");
@@ -248,12 +263,103 @@ public class MyDBConnection implements DBConnection {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.toString(), "SQL Update Exception", JOptionPane.WARNING_MESSAGE);
         }
-        
+
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public boolean updateCustomerPlus(String name, String address, String postCode, String phoneNumber, String homeNumber, String customerID, String payLater, String discountPlan) {
+
+        try {
+            pstm.close();
+            rs.close();
+
+            conn = DriverManager.getConnection(DatabaseURL);
+            System.err.println("Prior Update Query");
+            pstm = conn.prepareStatement("UPDATE Customer SET name = ?, address = ? , postCode = ?, phoneNumber = ?, homeNumber = ?, payLater = ?, discountID = ? WHERE customerID = ?");
+            System.err.println("After Update Query");
+            pstm.setString(1, name);
+            pstm.setString(2, address);
+            pstm.setString(3, postCode);
+            pstm.setString(4, phoneNumber);
+            pstm.setString(5, homeNumber);
+            pstm.setString(6, payLater);
+            pstm.setString(5, discountPlan);
+            pstm.setString(6, customerID);
+            System.err.print(conn.toString() + "\n" + pstm.toString() + "\n" + rs.toString());
+            pstm.execute();
+            return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.toString(), "SQL Update Exception", JOptionPane.WARNING_MESSAGE);
+        }
+
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean addJob(String statusOfJob, String jobDescription, String jobType, String mechanicID, String vehicleID, String customerID) {
+        System.err.println("Attempting to AddStaff");
+        try {  // String name, String role, String login, String password
+            pstm.close();
+            rs.close();
+            conn = DriverManager.getConnection(DatabaseURL);
+            System.err.println("Prior Insert Query");
+            pstm = conn.prepareStatement("INSERT INTO Job(statusOfJob, jobDescription, jobType, staffID, vehicleID, customerID) VALUES (?,?,?,?,?,?)");
+            System.err.println("After Insert Query");
+            pstm.setString(1, statusOfJob);
+            pstm.setString(2, jobDescription);
+            pstm.setString(3, jobType);
+            pstm.setString(4, mechanicID);
+            pstm.setString(5, vehicleID);
+            pstm.setString(6, customerID);
+            System.err.print(conn.toString() + "\n" + pstm.toString() + "\n" + rs.toString());
+            pstm.execute();
+            return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.toString(), "SQL Insert Exception", JOptionPane.WARNING_MESSAGE);
+        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
+    @Override
+    public ResultSet displayJob() throws SQLException {
+
+        try {
+            conn = DriverManager.getConnection(DatabaseURL);
+            stm = conn.createStatement();
+            rs = stm.executeQuery("Select jobNo, statusOfJob, jobDescription, jobType, startDate, endDate, jobDuration FROM Job");
+            System.out.println("displayAllStaff Executed");
+            return rs;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.toString(), "SQL Exception", JOptionPane.WARNING_MESSAGE);
+        }
+
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
-    
-    
+    @Override
+    public boolean addVehicle(String regNumber, String vehicleMake, String vehicleModel, String engSerial, String chassisNumber, String colour, String customerID) {
+        System.err.println("Attempting to addVehicle");
+        try {  // String name, String role, String login, String password
+            pstm.close();
+            rs.close();
+            conn = DriverManager.getConnection(DatabaseURL);
+            System.err.println("Prior Insert Query");
+            pstm = conn.prepareStatement("INSERT INTO Vehicle(regNumber, vehicleMake, vehicleModel,  engSerial, chassisNumber, colour, customerID) VALUES (?,?,?,?,?,?,?)");
+            System.err.println("After Insert Query");
+            pstm.setString(1, regNumber);
+            pstm.setString(2, vehicleMake);
+            pstm.setString(3, vehicleModel);
+            pstm.setString(4, engSerial);
+            pstm.setString(5, chassisNumber);
+            pstm.setString(6, colour);
+            pstm.setString(7, customerID);
+            System.err.print(conn.toString() + "\n" + pstm.toString() + "\n" + rs.toString());
+            pstm.execute();
+            return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.toString(), "SQL Insert Exception", JOptionPane.WARNING_MESSAGE);
+        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

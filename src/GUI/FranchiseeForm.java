@@ -5,10 +5,9 @@
  */
 package GUI;
 
-import GUI.Panels.customerPanel;
+
+import GUI.Panels.jobPanel1;
 import GUI.Panels.customerPlusPanel;
-import GUI.Panels.jobPanel;
-import GUI.Panels.jobPlusPanel;
 import GUI.Panels.reportsPanel;
 import GUI.Panels.stockPanel;
 
@@ -18,7 +17,7 @@ import GUI.Panels.stockPanel;
  */
 public class FranchiseeForm extends javax.swing.JFrame {
 
-    jobPlusPanel p1;
+    jobPanel1 p1;
     customerPlusPanel p2;
     stockPanel p3;
     reportsPanel p4;
@@ -28,7 +27,9 @@ public class FranchiseeForm extends javax.swing.JFrame {
      */
     public FranchiseeForm() {
         initComponents();
-        p1 = new jobPlusPanel();
+        
+        
+        p1 = new jobPanel1();
         p2 = new customerPlusPanel();
         p3 = new stockPanel();
         p4 = new reportsPanel();
@@ -64,8 +65,10 @@ public class FranchiseeForm extends javax.swing.JFrame {
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Franchisee Dashboard");
 
+        tabbedFranchiseePanel.setBackground(new java.awt.Color(255, 255, 255));
         tabbedFranchiseePanel.setFocusable(false);
         tabbedFranchiseePanel.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
+        tabbedFranchiseePanel.setPreferredSize(new java.awt.Dimension(1100, 600));
 
         javax.swing.GroupLayout franchiseePanelLayout = new javax.swing.GroupLayout(franchiseePanel);
         franchiseePanel.setLayout(franchiseePanelLayout);
@@ -73,9 +76,9 @@ public class FranchiseeForm extends javax.swing.JFrame {
             franchiseePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(franchiseePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 1171, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(tabbedFranchiseePanel, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(tabbedFranchiseePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         franchiseePanelLayout.setVerticalGroup(
             franchiseePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,8 +86,10 @@ public class FranchiseeForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tabbedFranchiseePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(tabbedFranchiseePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        tabbedFranchiseePanel.getAccessibleContext().setAccessibleParent(tabbedFranchiseePanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

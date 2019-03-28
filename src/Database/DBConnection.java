@@ -28,4 +28,16 @@ public interface DBConnection {
     ResultSet displayCustomer() throws SQLException;       
     public ResultSet searchCustomer(String value) throws SQLException;
     boolean updateCustomer(String name, String address, String postCode, String phoneNumber, String homeNumber, String customerID);
-}
+    boolean updateCustomerPlus(String name, String address, String postCode, String phoneNumber, String homeNumber, String customerID, String payLater, String discountPlan);
+    public ResultSet selectCustomer() throws SQLException;
+    
+    
+    
+    
+    
+
+    boolean addJob(String statusOfJob, String jobDescription, String jobType, String mechanicID, String vehicleID, String customerId);
+
+    public ResultSet displayJob() throws SQLException;     
+    boolean addVehicle(String regNumber, String vehicleMake, String vehicleModel, String engSerial, String chassisNumber, String colour, String customerID);
+            }

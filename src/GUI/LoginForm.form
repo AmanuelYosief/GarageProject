@@ -122,7 +122,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtStaffLogin">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Penelop"/>
+            <Property name="text" type="java.lang.String" value="Glynee"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="txtPassword"/>
             </Property>
@@ -130,7 +130,7 @@
         </Component>
         <Component class="javax.swing.JPasswordField" name="txtPassword">
           <Properties>
-            <Property name="text" type="java.lang.String" value="PinkMobile"/>
+            <Property name="text" type="java.lang.String" value="Gnasher"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="btnLogin"/>
             </Property>

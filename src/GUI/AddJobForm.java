@@ -5,18 +5,58 @@
  */
 package GUI;
 
+import Controller.controller;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
+
+
+
 /**
  *
  * @author amenu
  */
 public class AddJobForm extends javax.swing.JFrame {
 
+        private static Connection conn;
+    Statement stm;
+    PreparedStatement pstm;
+    ResultSet rs;
+     String DatabaseURL = "jdbc:sqlite:C://Users/amenu/OneDrive/Documents/NetbeansProjects/GarageProject/sqlite/db/Garage.db";
+     String mechanicID = null;
     /**
      * Creates new form InvoiceForm
      */
     public AddJobForm() {
         initComponents();
+           fetchAll();
+           
+            try {
+            conn = DriverManager.getConnection(DatabaseURL);
+            stm = conn.createStatement();
+            rs = stm.executeQuery("Select staffName FROM Staff WHERE staffRole = 'Mechanic' ");
+                                   System.out.println("displayAllStaff Executed");
+            while (rs.next()) { 
+            String pat = rs.getString("staffName");
+            cbMechanicAllocated.addItem(pat);
+        }
+            } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
     }
+           
+    }
+    
+        public void fetchAll() {
+        tblCustomer.setModel(DbUtils.resultSetToTableModel(controller.selectCustomer()));
+    }
+    
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,13 +78,20 @@ public class AddJobForm extends javax.swing.JFrame {
         txtModel = new javax.swing.JTextField();
         lblVehicleRegNo = new javax.swing.JLabel();
         txtVehicleRegNo = new javax.swing.JTextField();
-        lblJobCustomerName = new javax.swing.JLabel();
-        txtJobCustomerName = new javax.swing.JTextField();
-        txtTelephoneNo = new javax.swing.JTextField();
-        lblTelephoneNo = new javax.swing.JLabel();
         lblMechanicAllocated = new javax.swing.JLabel();
         cbMechanicAllocated = new javax.swing.JComboBox<>();
         btnAddJob = new javax.swing.JButton();
+        scrollTableCustomer = new javax.swing.JScrollPane();
+        tblCustomer = new javax.swing.JTable();
+        lblJobDescription1 = new javax.swing.JLabel();
+        lblJobType = new javax.swing.JLabel();
+        cbJobType = new javax.swing.JComboBox<>();
+        lblVehicleRegNo1 = new javax.swing.JLabel();
+        txtEngineSerialNo = new javax.swing.JTextField();
+        lblVehicleRegNo2 = new javax.swing.JLabel();
+        txtVehicleChassisNo = new javax.swing.JTextField();
+        lblVehicleRegNo3 = new javax.swing.JLabel();
+        txtVehicleColour = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,7 +100,7 @@ public class AddJobForm extends javax.swing.JFrame {
         lblTitle.setFont(new java.awt.Font("Segoe UI Light", 0, 36)); // NOI18N
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/jobIcon.png"))); // NOI18N
-        lblTitle.setText("Add Job");
+        lblTitle.setText("Add new job");
 
         lblJobDescription.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         lblJobDescription.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -81,104 +128,199 @@ public class AddJobForm extends javax.swing.JFrame {
 
         txtVehicleRegNo.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
 
-        lblJobCustomerName.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        lblJobCustomerName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblJobCustomerName.setText("Customer Name:");
-
-        txtJobCustomerName.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
-        txtJobCustomerName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtJobCustomerNameActionPerformed(evt);
-            }
-        });
-
-        txtTelephoneNo.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
-
-        lblTelephoneNo.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        lblTelephoneNo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTelephoneNo.setText("Telephone Number:");
-
         lblMechanicAllocated.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         lblMechanicAllocated.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMechanicAllocated.setText("Mechanic Allocated:");
 
         cbMechanicAllocated.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
         cbMechanicAllocated.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None" }));
+        cbMechanicAllocated.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cbMechanicAllocatedMousePressed(evt);
+            }
+        });
 
         btnAddJob.setText("Add");
+        btnAddJob.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddJobActionPerformed(evt);
+            }
+        });
+
+        tblCustomer.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tblCustomer.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "Name", "Phone Number"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblCustomer.setGridColor(new java.awt.Color(255, 255, 255));
+        tblCustomer.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tblCustomerFocusGained(evt);
+            }
+        });
+        tblCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCustomerMouseClicked(evt);
+            }
+        });
+        tblCustomer.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblCustomerKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tblCustomerKeyTyped(evt);
+            }
+        });
+        scrollTableCustomer.setViewportView(tblCustomer);
+
+        lblJobDescription1.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        lblJobDescription1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblJobDescription1.setText("Select Customer");
+
+        lblJobType.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        lblJobType.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblJobType.setText("Job Type");
+
+        cbJobType.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
+        cbJobType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOT", "Annaul service", "Repair" }));
+        cbJobType.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cbJobTypeMousePressed(evt);
+            }
+        });
+
+        lblVehicleRegNo1.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        lblVehicleRegNo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblVehicleRegNo1.setText("Engine Serial No:");
+
+        txtEngineSerialNo.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
+
+        lblVehicleRegNo2.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        lblVehicleRegNo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblVehicleRegNo2.setText("Chassis No:");
+
+        txtVehicleChassisNo.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
+
+        lblVehicleRegNo3.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        lblVehicleRegNo3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblVehicleRegNo3.setText("Colour");
+
+        txtVehicleColour.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
 
         javax.swing.GroupLayout addJobPanelLayout = new javax.swing.GroupLayout(addJobPanel);
         addJobPanel.setLayout(addJobPanelLayout);
         addJobPanelLayout.setHorizontalGroup(
             addJobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addJobPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+                .addGroup(addJobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addJobPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(addJobPanelLayout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addGroup(addJobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnAddJob, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(addJobPanelLayout.createSequentialGroup()
+                                .addGroup(addJobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(addJobPanelLayout.createSequentialGroup()
+                                        .addComponent(lblVehicleRegNo2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtVehicleChassisNo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblVehicleRegNo3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtVehicleColour, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(addJobPanelLayout.createSequentialGroup()
+                                        .addComponent(lblVehicleRegNo1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtEngineSerialNo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addJobPanelLayout.createSequentialGroup()
+                                        .addComponent(lblJobType)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cbJobType, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(addJobPanelLayout.createSequentialGroup()
+                                        .addComponent(lblMechanicAllocated)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cbMechanicAllocated, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(scrollJobDescription, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(addJobPanelLayout.createSequentialGroup()
+                                        .addComponent(lblVehicleRegNo)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtVehicleRegNo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(addJobPanelLayout.createSequentialGroup()
+                                        .addComponent(lblMake)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtMake, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblModel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lblJobDescription))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(addJobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(scrollTableCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblJobDescription1))))
+                        .addGap(0, 29, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(addJobPanelLayout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addGroup(addJobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(addJobPanelLayout.createSequentialGroup()
-                        .addComponent(lblJobDescription)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scrollJobDescription))
-                    .addGroup(addJobPanelLayout.createSequentialGroup()
-                        .addComponent(lblVehicleRegNo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtVehicleRegNo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(addJobPanelLayout.createSequentialGroup()
-                        .addComponent(lblMake)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtMake, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblModel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(addJobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnAddJob, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(addJobPanelLayout.createSequentialGroup()
-                            .addGroup(addJobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblJobCustomerName)
-                                .addComponent(lblTelephoneNo)
-                                .addComponent(lblMechanicAllocated))
-                            .addGap(96, 96, 96)
-                            .addGroup(addJobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtTelephoneNo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtJobCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cbMechanicAllocated, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         addJobPanelLayout.setVerticalGroup(
             addJobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addJobPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addComponent(lblTitle)
-                .addGap(27, 27, 27)
+                .addGap(21, 21, 21)
                 .addGroup(addJobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblJobDescription)
-                    .addComponent(scrollJobDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(addJobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMake)
-                    .addComponent(lblModel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtMake, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(addJobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblVehicleRegNo)
-                    .addComponent(txtVehicleRegNo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(addJobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblJobCustomerName)
-                    .addComponent(txtJobCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(addJobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTelephoneNo)
-                    .addComponent(txtTelephoneNo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(addJobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMechanicAllocated)
-                    .addComponent(cbMechanicAllocated, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(addJobPanelLayout.createSequentialGroup()
+                        .addComponent(lblJobDescription)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(scrollJobDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(addJobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblMake)
+                            .addComponent(txtMake, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblModel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(addJobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblVehicleRegNo)
+                            .addComponent(txtVehicleRegNo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(addJobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblVehicleRegNo1)
+                            .addComponent(txtEngineSerialNo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(addJobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblVehicleRegNo2)
+                            .addComponent(txtVehicleChassisNo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblVehicleRegNo3)
+                            .addComponent(txtVehicleColour, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(addJobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblMechanicAllocated)
+                            .addComponent(cbMechanicAllocated, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(addJobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblJobType)
+                            .addComponent(cbJobType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(addJobPanelLayout.createSequentialGroup()
+                        .addComponent(lblJobDescription1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(scrollTableCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAddJob, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -198,9 +340,90 @@ public class AddJobForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtJobCustomerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJobCustomerNameActionPerformed
+    private void tblCustomerFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblCustomerFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtJobCustomerNameActionPerformed
+    }//GEN-LAST:event_tblCustomerFocusGained
+
+    private void tblCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCustomerMouseClicked
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblCustomerMouseClicked
+
+    private void tblCustomerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblCustomerKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblCustomerKeyPressed
+
+    private void tblCustomerKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblCustomerKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblCustomerKeyTyped
+
+    private void cbMechanicAllocatedMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbMechanicAllocatedMousePressed
+        // TODO add your handling code here:
+
+    
+        
+        
+        
+        
+    }//GEN-LAST:event_cbMechanicAllocatedMousePressed
+
+    private void btnAddJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddJobActionPerformed
+        // TODO add your handling code here:
+         String jobType = Integer.toString(cbJobType.getSelectedIndex()); 
+         String mechanicName = cbMechanicAllocated.getSelectedItem().toString();
+         String mechanicID = null;
+         String customerID = null;
+         customerID = tblCustomer.getValueAt(tblCustomer.getSelectedRow(), 0).toString();
+                     System.out.println(mechanicName);
+                     System.out.println(customerID);
+            try {
+            conn = DriverManager.getConnection(DatabaseURL);
+            pstm = conn.prepareStatement("SELECT staffID FROM staff WHERE staffName = ?"); //query to select the staff memebers dependednt on the login and password
+            pstm.setString(1, mechanicName);
+            rs = pstm.executeQuery(); // get the infor from database
+            System.out.println("Login Executed");
+            System.out.println(rs);
+            while(rs.next()){
+            System.out.print(rs.getString("staffID"));
+            mechanicID = rs.getString("staffID");
+            }
+        }catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+        
+       
+    }
+            // Add Vehicle
+        controller.addVehicle(txtVehicleRegNo.getText().trim(),txtMake.getText().trim(), txtModel.getText().toString(), txtEngineSerialNo.getText().trim(), txtVehicleChassisNo.getText().toString(), txtVehicleColour.getText().toString(), customerID);
+            // Get Vehicle ID
+            String VehicleID = null;
+        try {
+            conn = DriverManager.getConnection(DatabaseURL);
+            pstm = conn.prepareStatement("SELECT vehicleID FROM Vehicle WHERE regNumber = ? AND customerID = ?"); //query to select the staff memebers dependednt on the login and password
+            pstm.setString(1, txtVehicleRegNo.getText().trim());
+            pstm.setString(2, customerID);
+            rs = pstm.executeQuery(); // get the infor from database
+            System.out.println("Login Executed");
+            System.out.println(rs);
+            while(rs.next()){
+            System.out.print(rs.getString("vehicleID"));
+            VehicleID = rs.getString("vehicleID");
+            }
+        }catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+        
+       
+    }    
+           // Add to Job
+        //public boolean addJob(String statusOfJob, String jobDescription, String jobType, String mechanicID, String vehicleID, String customerID)
+        controller.addJob("Pending", txtJobDescription.getText().trim(), jobType ,mechanicID, VehicleID , customerID);
+        
+    }//GEN-LAST:event_btnAddJobActionPerformed
+
+    private void cbJobTypeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbJobTypeMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbJobTypeMousePressed
 
     /**
      * @param args the command line arguments
@@ -243,21 +466,28 @@ public class AddJobForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addJobPanel;
     private javax.swing.JButton btnAddJob;
+    private javax.swing.JComboBox<String> cbJobType;
     private javax.swing.JComboBox<String> cbMechanicAllocated;
-    private javax.swing.JLabel lblJobCustomerName;
     private javax.swing.JLabel lblJobDescription;
+    private javax.swing.JLabel lblJobDescription1;
+    private javax.swing.JLabel lblJobType;
     private javax.swing.JLabel lblMake;
     private javax.swing.JLabel lblMechanicAllocated;
     private javax.swing.JLabel lblModel;
-    private javax.swing.JLabel lblTelephoneNo;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblVehicleRegNo;
+    private javax.swing.JLabel lblVehicleRegNo1;
+    private javax.swing.JLabel lblVehicleRegNo2;
+    private javax.swing.JLabel lblVehicleRegNo3;
     private javax.swing.JScrollPane scrollJobDescription;
-    private javax.swing.JTextField txtJobCustomerName;
+    private javax.swing.JScrollPane scrollTableCustomer;
+    private javax.swing.JTable tblCustomer;
+    private javax.swing.JTextField txtEngineSerialNo;
     private javax.swing.JTextArea txtJobDescription;
     private javax.swing.JTextField txtMake;
     private javax.swing.JTextField txtModel;
-    private javax.swing.JTextField txtTelephoneNo;
+    private javax.swing.JTextField txtVehicleChassisNo;
+    private javax.swing.JTextField txtVehicleColour;
     private javax.swing.JTextField txtVehicleRegNo;
     // End of variables declaration//GEN-END:variables
 }

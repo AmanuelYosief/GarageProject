@@ -86,7 +86,7 @@
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="btnRemoveStaff" min="-2" pref="118" max="-2" attributes="0"/>
@@ -99,23 +99,23 @@
                                               <Component id="lblLogin" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="txtName" min="-2" pref="242" max="-2" attributes="0"/>
-                                              <Component id="txtLogin" min="-2" pref="100" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="txtName" pref="242" max="32767" attributes="0"/>
+                                              <Component id="txtLogin" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="lblJobRole" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="cbJobRole" max="32767" attributes="0"/>
+                                          <Component id="cbJobRole" min="-2" pref="242" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Group type="103" groupAlignment="1" attributes="0">
                                               <Component id="txtDatabaseURL" max="32767" attributes="0"/>
-                                              <Group type="102" attributes="0">
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="btnBackup" min="-2" pref="116" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                   <Component id="btnRestore" min="-2" pref="115" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="btnBackup" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
@@ -126,10 +126,11 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblDatabase" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="lblStaffDetails" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="lblStaffDetails" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lblDatabase" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -153,13 +154,9 @@
                       <Component id="btnAddStaff" max="32767" attributes="0"/>
                       <Component id="txtSearchStaff" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="scrollTableStaff" min="-2" pref="491" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblLogin" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="txtLogin" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
@@ -174,32 +171,27 @@
                               <Component id="lblJobRole" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="cbJobRole" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnRemoveStaff" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="btnUpdateStaff" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="btnUpdateStaff" pref="50" max="32767" attributes="0"/>
+                              <Component id="btnRemoveStaff" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                           <Component id="lblDatabase" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="txtDatabaseURL" min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="btnBrowse" min="-2" pref="25" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnBrowse" alignment="3" pref="37" max="32767" attributes="0"/>
+                              <Component id="txtDatabaseURL" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="btnBackup" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                                      <Component id="btnRestore" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="lblCompanyLogo" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnRestore" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
+                              <Component id="btnBackup" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                          <Component id="lblCompanyLogo" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="scrollTableStaff" min="-2" pref="491" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>

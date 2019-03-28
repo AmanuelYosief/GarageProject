@@ -7,6 +7,10 @@ package GUI.Panels;
 
 import Controller.controller;
 import GUI.AddJobForm;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.WindowConstants;
 import net.proteanit.sql.DbUtils;
 
@@ -14,21 +18,29 @@ import net.proteanit.sql.DbUtils;
  *
  * @author amenu
  */
-public class jobPlusPanel extends javax.swing.JPanel {
+
+
+public class jobPanel1 extends javax.swing.JPanel {
 
     /**
-     * Creates new form jobPlusPanel
+     * Creates new form jobPanel
      */
-    public jobPlusPanel() {
+            private static Connection conn;
+    Statement stm;
+    PreparedStatement pstm;
+    ResultSet rs;
+     String DatabaseURL = "jdbc:sqlite:C://Users/amenu/OneDrive/Documents/NetbeansProjects/GarageProject/sqlite/db/Garage.db";
+    
+    
+    
+    public jobPanel1() {
+        initComponents();
      fetchAll();
     }
     
         public void fetchAll() {
-        // All Jobs
-            //tblJob.setModel(DbUtils.resultSetToTableModel(controller.displayJob()));
-        // Pending Jobs
+        tblJob.setModel(DbUtils.resultSetToTableModel(controller.displayJob()));
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,6 +86,7 @@ public class jobPlusPanel extends javax.swing.JPanel {
         cbMechanicAllocated = new javax.swing.JComboBox<>();
         btnAlterJob = new javax.swing.JButton();
         btnAllocateMechanic = new javax.swing.JButton();
+        lblCompanyLogo = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -267,6 +280,8 @@ public class jobPlusPanel extends javax.swing.JPanel {
         btnAllocateMechanic.setBackground(new java.awt.Color(255, 255, 255));
         btnAllocateMechanic.setText("Allocate Mechanic");
 
+        lblCompanyLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/companyLogo.jpg"))); // NOI18N
+
         javax.swing.GroupLayout jobPanelLayout = new javax.swing.GroupLayout(jobPanel);
         jobPanel.setLayout(jobPanelLayout);
         jobPanelLayout.setHorizontalGroup(
@@ -291,6 +306,57 @@ public class jobPlusPanel extends javax.swing.JPanel {
                         .addComponent(scrollTableAllJobs, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jobPanelLayout.createSequentialGroup()
+                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jobPanelLayout.createSequentialGroup()
+                                .addGap(99, 99, 99)
+                                .addComponent(lblJobTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jobPanelLayout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addComponent(btnAddJob)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jobPanelLayout.createSequentialGroup()
+                                        .addComponent(lblJobStatus)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(cdJobStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblDateBooked)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtDateBooked))
+                                    .addGroup(jobPanelLayout.createSequentialGroup()
+                                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(lblJobNo)
+                                            .addComponent(lblJobDescription))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtJobNo, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(scrollJobDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jobPanelLayout.createSequentialGroup()
+                                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblJobCustomerName)
+                                            .addComponent(lblTelephoneNo)
+                                            .addComponent(lblMechanicAllocated))
+                                        .addGap(96, 96, 96)
+                                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtTelephoneNo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtJobCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cbMechanicAllocated, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jobPanelLayout.createSequentialGroup()
+                                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jobPanelLayout.createSequentialGroup()
+                                                .addComponent(lblMake)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtMake, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(lblModel))
+                                            .addComponent(lblVehicleRegNo))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtVehicleRegNo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGap(31, 31, 31))
+                    .addGroup(jobPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnProduceInvoice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -299,56 +365,9 @@ public class jobPlusPanel extends javax.swing.JPanel {
                         .addComponent(btnAlterJob)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAllocateMechanic)
-                        .addGap(104, 104, 104))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jobPanelLayout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addComponent(lblJobTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 81, Short.MAX_VALUE))
-                    .addGroup(jobPanelLayout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(btnAddJob)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jobPanelLayout.createSequentialGroup()
-                                .addComponent(lblJobStatus)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cdJobStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblDateBooked)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDateBooked))
-                            .addGroup(jobPanelLayout.createSequentialGroup()
-                                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblJobNo)
-                                    .addComponent(lblJobDescription))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtJobNo, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(scrollJobDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jobPanelLayout.createSequentialGroup()
-                                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblJobCustomerName)
-                                    .addComponent(lblTelephoneNo)
-                                    .addComponent(lblMechanicAllocated))
-                                .addGap(96, 96, 96)
-                                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTelephoneNo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtJobCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbMechanicAllocated, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jobPanelLayout.createSequentialGroup()
-                                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jobPanelLayout.createSequentialGroup()
-                                        .addComponent(lblMake)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtMake, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lblModel))
-                                    .addComponent(lblVehicleRegNo))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtVehicleRegNo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(31, 31, 31))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCompanyLogo)
+                        .addGap(77, 77, 77))))
         );
         jobPanelLayout.setVerticalGroup(
             jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,18 +418,23 @@ public class jobPlusPanel extends javax.swing.JPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAddJob, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(104, 104, 104)))
-                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jobPanelLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(btnProduceInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jobPanelLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAllocateMechanic, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAlterJob, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPickJob, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(773, 773, 773))
+                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jobPanelLayout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(btnProduceInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jobPanelLayout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnAllocateMechanic, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnAlterJob, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPickJob, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jobPanelLayout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(lblCompanyLogo)))
+                .addGap(752, 752, 752))
             .addGroup(jobPanelLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -431,21 +455,13 @@ public class jobPlusPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1243, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jobPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(jobPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 503, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jobPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jobPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -464,6 +480,15 @@ public class jobPlusPanel extends javax.swing.JPanel {
     private void tblAllJobsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblAllJobsKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_tblAllJobsKeyTyped
+
+    private void btnAddJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddJobActionPerformed
+        controller.closeDBConnection();
+        AddJobForm openAddJob = new AddJobForm();
+        openAddJob.setLocationRelativeTo(null);
+        openAddJob.setResizable(false);
+        openAddJob.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        openAddJob.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddJobActionPerformed
 
     private void tblJobFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblJobFocusGained
         // TODO add your handling code here:
@@ -485,15 +510,6 @@ public class jobPlusPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtJobCustomerNameActionPerformed
 
-    private void btnAddJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddJobActionPerformed
-        controller.closeDBConnection();
-        AddJobForm openAddJob = new AddJobForm();
-        openAddJob.setLocationRelativeTo(null);
-        openAddJob.setResizable(false);
-        openAddJob.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        openAddJob.setVisible(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddJobActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddJob;
@@ -505,6 +521,7 @@ public class jobPlusPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cdJobStatus;
     private javax.swing.JPanel jobPanel;
     private javax.swing.JLabel lblAllJobs;
+    private javax.swing.JLabel lblCompanyLogo;
     private javax.swing.JLabel lblDateBooked;
     private javax.swing.JLabel lblJobCustomerName;
     private javax.swing.JLabel lblJobDescription;

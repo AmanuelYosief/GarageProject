@@ -28,6 +28,7 @@ public class controller {
     public controller() {
 
     }
+
     static public boolean login(String login, String password) { //this runs the login test
         ResultSet resultSet;
         boolean passed = false;
@@ -41,11 +42,7 @@ public class controller {
                 passed = false;
             } else {
                 resultSet.next();
-                String staffLogin = resultSet.getString("login");
-              //  String firstName = resultSet.getString("staffFirstName");
-              //  String lastName = resultSet.getString("staffLastName");
                 String Role = resultSet.getString("staffRole");
-                String Email = resultSet.getString("staffEmail");
 
                 switch (Role) {
                     case "Administrator":
@@ -119,11 +116,12 @@ public class controller {
         return null;
 
     }
+
     // Name, Login, password, Role
     public static boolean addStaff(String name, String role, String login, String password) {
         System.err.println("Attempting to AddStaff @controller class");
 
-        boolean addStaff = conn.addStaff(name, role,login,password);
+        boolean addStaff = conn.addStaff(name, role, login, password);
 
         if (addStaff == true) {
             System.err.println("Staff has been added to the database!");
@@ -172,10 +170,6 @@ public class controller {
         }
     }
 
-    
-    
-    
-
     public static boolean addCustomer(String name, String address, String postCode, String phoneNumber, String homeNumber) {
         System.err.println("Attempting to AddStaff @controller class");
 
@@ -190,7 +184,7 @@ public class controller {
             return false;
         }
     }
-    
+
     public static ResultSet displayCustomer() {
         try {
             return conn.displayCustomer();
@@ -200,8 +194,18 @@ public class controller {
         return null;
 
     }
-    
-        public static ResultSet searchCustomer(String value) {
+
+    public static ResultSet selectCustomer() {
+        try {
+            return conn.selectCustomer();
+        } catch (SQLException ex) {
+
+        }
+        return null;
+
+    }
+
+    public static ResultSet searchCustomer(String value) {
         try {
             return conn.searchCustomer(value);
         } catch (SQLException ex) {
@@ -210,9 +214,8 @@ public class controller {
         return null;
 
     }
-        
-        
-            public static ResultSet getCustomerID(String name, String address, String postCode, String phoneNumber, String homeNumber) {
+
+    public static ResultSet getCustomerID(String name, String address, String postCode, String phoneNumber, String homeNumber) {
         try {
             return conn.displayCustomer();
         } catch (SQLException ex) {
@@ -222,7 +225,7 @@ public class controller {
 
     }
 
-        public static boolean updateCustomer(String name, String address, String postCode, String phoneNumber, String homeNumber, String customerID) throws SQLException { 
+    public static boolean updateCustomer(String name, String address, String postCode, String phoneNumber, String homeNumber, String customerID) throws SQLException {
         System.err.println("Attempting to AddStaff @controller class");
 
         boolean updateCustomer = conn.updateCustomer(name, address, postCode, phoneNumber, homeNumber, customerID);
@@ -235,7 +238,59 @@ public class controller {
             JOptionPane.showMessageDialog(null, "Failed to update Customer", "InfoBox", JOptionPane.OK_OPTION);
             return false;
         }
-    }        
-            
-}
+    }
 
+    public static boolean updateCustomerPlus(String name, String address, String postCode, String phoneNumber, String homeNumber, String customerID, String payLater, String discountPlan) throws SQLException {
+        System.err.println("Attempting to AddStaff @controller class");
+
+        boolean updateCustomer = conn.updateCustomerPlus(name, address, postCode, phoneNumber, homeNumber, customerID, payLater, discountPlan);
+
+        if (updateCustomer == true) {
+            System.err.println("Customer Plus has been updated!");
+            JOptionPane.showMessageDialog(null, "Customer has successfully been updated!", "InfoBox", JOptionPane.OK_OPTION);
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Failed to update Customer", "InfoBox", JOptionPane.OK_OPTION);
+            return false;
+        }
+    }
+
+    public static boolean addJob(String statusOfJob, String jobDescription, String jobType, String mechanicID, String vehicleID, String customerID) {
+        System.err.println("Attempting to AddStaff @controller class");
+
+        boolean addStaff = conn.addJob(statusOfJob, jobDescription, jobType, mechanicID, vehicleID, customerID);
+        if (addStaff == true) {
+            System.err.println("Vehicle has been added to the database!");
+            JOptionPane.showMessageDialog(null, "Vehicle has successfully been added!", "InfoBox", JOptionPane.OK_OPTION);
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Vehicle to Add Staff", "InfoBox", JOptionPane.OK_OPTION);
+            return false;
+        }
+    }
+
+    public static ResultSet displayJob() {
+        try {
+            return conn.displayJob();
+        } catch (SQLException ex) {
+
+        }
+        return null;
+
+    }
+
+    public static boolean addVehicle(String regNumber, String vehicleMake, String vehicleModel, String engSerial, String chassisNumber, String colour, String customerID) {
+        System.err.println("Attempting to AddStaff @controller class");
+        boolean addVehicle = conn.addVehicle(regNumber, vehicleMake, vehicleModel, engSerial, chassisNumber, colour, customerID);
+
+        if (addVehicle == true) {
+            System.err.println("Vehicle has been added to the database!");
+            JOptionPane.showMessageDialog(null, "Vehicle has successfully been added!", "InfoBox", JOptionPane.OK_OPTION);
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Failed to Add Vehicle", "InfoBox", JOptionPane.OK_OPTION);
+            return false;
+        }
+    }
+
+}

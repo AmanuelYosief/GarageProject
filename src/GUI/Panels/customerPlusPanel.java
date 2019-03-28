@@ -5,6 +5,15 @@
  */
 package GUI.Panels;
 
+import Controller.controller;
+import GUI.AddCustomerForm;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
+import net.proteanit.sql.DbUtils;
+
 /**
  *
  * @author amenu
@@ -16,6 +25,7 @@ public class customerPlusPanel extends javax.swing.JPanel {
      */
     public customerPlusPanel() {
         initComponents();
+        fetchAll();
     }
 
     /**
@@ -71,17 +81,17 @@ public class customerPlusPanel extends javax.swing.JPanel {
         tblCustomer.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         tblCustomer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Name", "Email", "Phone Number", "Address", "Post Code", "Fax Number"
+                "ID", "Name", "Address", "Post Code", "Phone Number", "Home Number", "Pay Later", "DiscountPlan"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, true, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -156,7 +166,7 @@ public class customerPlusPanel extends javax.swing.JPanel {
         lblDiscountPlan.setText("Discount Plan");
 
         cbDiscountPlan.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
-        cbDiscountPlan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fixed", "Variable", "Flexible" }));
+        cbDiscountPlan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Fixed", "Variable", "Flexible" }));
 
         btnUpdateCustomer.setBackground(new java.awt.Color(255, 255, 255));
         btnUpdateCustomer.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
@@ -199,26 +209,27 @@ public class customerPlusPanel extends javax.swing.JPanel {
                                 .addComponent(txtCustomerPostCode, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerPanelLayout.createSequentialGroup()
                                 .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblFaxNumber)
-                                    .addComponent(lblPayLater)
-                                    .addComponent(lblDiscountPlan))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbDiscountPlan, 0, 200, Short.MAX_VALUE)
-                                    .addComponent(cbPayLater, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCustomerHomeNumber, javax.swing.GroupLayout.Alignment.TRAILING)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerPanelLayout.createSequentialGroup()
-                                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblCustomerName)
                                     .addComponent(lblCustomerPhoneNumber))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtCustomerPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(txtCustomerName))))
+                                    .addComponent(txtCustomerName)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerPanelLayout.createSequentialGroup()
+                                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblFaxNumber)
+                                    .addComponent(lblPayLater)
+                                    .addComponent(lblDiscountPlan))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnUpdateCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(cbDiscountPlan, 0, 200, Short.MAX_VALUE)
+                                        .addComponent(cbPayLater, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtCustomerHomeNumber, javax.swing.GroupLayout.Alignment.TRAILING)))))
                         .addGap(22, 22, 22))
                     .addGroup(customerPanelLayout.createSequentialGroup()
-                        .addComponent(btnUpdateCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblCompanyLogo)))
                 .addContainerGap())
         );
@@ -263,7 +274,7 @@ public class customerPlusPanel extends javax.swing.JPanel {
                                 .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(lblDiscountPlan)
                                     .addComponent(cbDiscountPlan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(39, 39, 39)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnUpdateCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(scrollTableCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE))
@@ -303,15 +314,18 @@ public class customerPlusPanel extends javax.swing.JPanel {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
+        public void fetchAll() {
+        tblCustomer.setModel(DbUtils.resultSetToTableModel(controller.displayCustomer()));
+    }
 
     private void btnAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustomerActionPerformed
         // TODO add your handling code here:
         controller.closeDBConnection();
-        AddStaffForm openAddStaff = new AddStaffForm();
-        openAddStaff.setLocationRelativeTo(null);
-        openAddStaff.setResizable(false);
-        openAddStaff.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        openAddStaff.setVisible(true);
+        AddCustomerForm openAddCustomer = new AddCustomerForm();
+        openAddCustomer.setLocationRelativeTo(null);
+        openAddCustomer.setResizable(false);
+        openAddCustomer.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        openAddCustomer.setVisible(true);
     }//GEN-LAST:event_btnAddCustomerActionPerformed
 
     private void tblCustomerFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblCustomerFocusGained
@@ -332,6 +346,30 @@ public class customerPlusPanel extends javax.swing.JPanel {
 
     private void btnUpdateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCustomerActionPerformed
         // TODO add your handling code here:
+        String payLater = null;
+        if(cbPayLater.getState())
+            payLater = "1";
+        else payLater = "0";
+        
+        String index = Integer.toString(cbDiscountPlan.getSelectedIndex());
+        int cd = JOptionPane.showConfirmDialog(null,"Are you sure you want to update this customer?", "Update Customer", JOptionPane.YES_NO_OPTION);
+        if (cd == JOptionPane.YES_OPTION ){
+//txtCustomerName.getText().trim(), txtCustomerAddress.getText().trim(),txtCustomerPostCode.getText().trim(), txtCustomerPhoneNumber.getText().trim(),txtCustomerHomeNumber.getText().trim()
+            try {
+                controller.updateCustomerPlus(txtCustomerName.getText().trim(),txtCustomerAddress.getText().trim(),txtCustomerPostCode.getText().trim(),txtCustomerPhoneNumber.getText().trim(),txtCustomerHomeNumber.getText().trim(), tblCustomer.getValueAt(tblCustomer.getSelectedRow(), 0).toString(), payLater,index );
+            } catch (SQLException ex) {
+                Logger.getLogger(customerPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+          JOptionPane.showMessageDialog(null, "Customer sucessfully updated!", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
+        fetchAll();
+        }
+        else if (cd == JOptionPane.NO_OPTION){
+        fetchAll();
+        }
+        
+        
+        
+        
     }//GEN-LAST:event_btnUpdateCustomerActionPerformed
 
 

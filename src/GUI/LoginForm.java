@@ -50,10 +50,10 @@ public class LoginForm extends javax.swing.JFrame {
 
         lblLoginIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/loginIcon.png"))); // NOI18N
 
-        txtStaffLogin.setText("Penelop");
+        txtStaffLogin.setText("Glynee");
         txtStaffLogin.setNextFocusableComponent(txtPassword);
 
-        txtPassword.setText("PinkMobile");
+        txtPassword.setText("Gnasher");
         txtPassword.setNextFocusableComponent(btnLogin);
 
         btnLogin.setBackground(new java.awt.Color(255, 255, 255));
