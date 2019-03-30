@@ -276,8 +276,18 @@ public class controller {
 
         }
         return null;
+    }
+    
+        public static ResultSet displayPendingJob() {
+        try {
+            return conn.displayJob();
+        } catch (SQLException ex) {
+
+        }
+        return null;
 
     }
+
 
     public static boolean addVehicle(String regNumber, String vehicleMake, String vehicleModel, String engSerial, String chassisNumber, String colour, String customerID) {
         System.err.println("Attempting to AddStaff @controller class");
@@ -292,5 +302,35 @@ public class controller {
             return false;
         }
     }
+    
+        public static ResultSet displayStock() {
+        try {
+            return conn.displayStock();
+        } catch (SQLException ex) {
+
+        }
+        return null;
+
+    }
+        
+            public static ResultSet searchStock(String value) {
+        try {
+            return conn.searchStock(value);
+        } catch (SQLException ex) {
+
+        }
+        return null;
+
+    }
+                   public static ResultSet searchJob(String value) {
+        try {
+            return conn.searchJob(value);
+        } catch (SQLException ex) {
+
+        }
+        return null;
+
+    }
+        
 
 }

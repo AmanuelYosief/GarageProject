@@ -84,6 +84,11 @@ public class jobPanel extends javax.swing.JPanel {
         lblsearchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/searchIcon.png"))); // NOI18N
 
         txtSearchJob.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
+        txtSearchJob.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchJobKeyReleased(evt);
+            }
+        });
 
         btnAddJob.setBackground(new java.awt.Color(255, 255, 255));
         btnAddJob.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
@@ -358,7 +363,7 @@ public class jobPanel extends javax.swing.JPanel {
         // Get VehicleID & CustomerID from Job
         // Then display them on the relevant fields
         
-        
+       /* 
         String vehicleID = null;
         System.out.println(vehicleID);
         String customerID = null;
@@ -400,8 +405,7 @@ public class jobPanel extends javax.swing.JPanel {
         }catch (Exception e) {
         JOptionPane.showMessageDialog(null, e + "BBBBBBBBBBBBBB");
     } 
-            txtCustomerName.setText(name);
-            txtTelephoneNo.setText(phoneNumber);
+
         
         // Get Vehicle Detail
             String regNumber = null;
@@ -422,22 +426,44 @@ public class jobPanel extends javax.swing.JPanel {
         }catch (Exception e) {
         JOptionPane.showMessageDialog(null, e + "CCCCCCCCCCCCCC");
     } 
-        txtMake.setText(vehicleMake);
-        txtModel.setText(vehicleModel);
-        txtVehicleRegNo.setText(regNumber);
+*/
+
         
+       
+       
         txtJobNo.setText(tblJob.getValueAt(tblJob.getSelectedRow(), 0).toString());
         cdJobStatus.setSelectedItem(tblJob.getValueAt(tblJob.getSelectedRow(), 1).toString());
         txtJobDescription.setText(tblJob.getValueAt(tblJob.getSelectedRow(), 2).toString());
+                txtMake.setText(tblJob.getValueAt(tblJob.getSelectedRow(), 3).toString());
+                        txtModel.setText(tblJob.getValueAt(tblJob.getSelectedRow(), 4).toString());
+                txtVehicleRegNo.setText(tblJob.getValueAt(tblJob.getSelectedRow(), 5).toString());
+                
+                
+                txtCustomerName.setText(tblJob.getValueAt(tblJob.getSelectedRow(), 7).toString());
+        txtTelephoneNo.setText(tblJob.getValueAt(tblJob.getSelectedRow(), 8).toString());
+
+
+        
+        
     }//GEN-LAST:event_tblJobMouseClicked
 
     private void tblJobKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblJobKeyPressed
         // TODO add your handling code here:
+        
+        
+        
+        
+        
     }//GEN-LAST:event_tblJobKeyPressed
 
     private void tblJobKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblJobKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_tblJobKeyTyped
+
+    private void txtSearchJobKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchJobKeyReleased
+        // TODO add your handling code here:
+        tblJob.setModel(DbUtils.resultSetToTableModel(controller.searchJob(txtSearchJob.getText())));
+    }//GEN-LAST:event_txtSearchJobKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

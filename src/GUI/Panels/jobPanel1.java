@@ -8,9 +8,11 @@ package GUI.Panels;
 import Controller.controller;
 import GUI.AddJobForm;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 import net.proteanit.sql.DbUtils;
 
@@ -36,10 +38,28 @@ public class jobPanel1 extends javax.swing.JPanel {
     public jobPanel1() {
         initComponents();
      fetchAll();
+     
+                 try {
+            conn = DriverManager.getConnection(DatabaseURL);
+            stm = conn.createStatement();
+            rs = stm.executeQuery("Select staffName FROM Staff WHERE staffRole = 'Mechanic' ");
+                                   System.out.println("displayAllStaff Executed");
+            while (rs.next()) { 
+            String pat = rs.getString("staffName");
+            cbMechanicAllocated.addItem(pat);
+        }
+            } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+    }
+                 
+                 
+ 
+     
     }
     
         public void fetchAll() {
-        tblJob.setModel(DbUtils.resultSetToTableModel(controller.displayJob()));
+        tblAllJobs.setModel(DbUtils.resultSetToTableModel(controller.displayJob()));
+        tblPendingJob.setModel(DbUtils.resultSetToTableModel(controller.displayJob()));
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,7 +79,7 @@ public class jobPanel1 extends javax.swing.JPanel {
         btnAddJob = new javax.swing.JButton();
         lblPendingJobs = new javax.swing.JLabel();
         scrollTablePendingJobs = new javax.swing.JScrollPane();
-        tblJob = new javax.swing.JTable();
+        tblPendingJob = new javax.swing.JTable();
         btnProduceInvoice = new javax.swing.JButton();
         btnPickJob = new javax.swing.JButton();
         lblJobTitle = new javax.swing.JLabel();
@@ -86,7 +106,6 @@ public class jobPanel1 extends javax.swing.JPanel {
         cbMechanicAllocated = new javax.swing.JComboBox<>();
         btnAlterJob = new javax.swing.JButton();
         btnAllocateMechanic = new javax.swing.JButton();
-        lblCompanyLogo = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -97,23 +116,28 @@ public class jobPanel1 extends javax.swing.JPanel {
         lblAllJobs.setText("All Jobs");
 
         txtSearchAllJob.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
+        txtSearchAllJob.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchAllJobKeyReleased(evt);
+            }
+        });
 
         lblsearchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/searchIcon.png"))); // NOI18N
 
         tblAllJobs.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         tblAllJobs.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Job Number", "Description", "Status", "Mechanic", "Customer", "Start Date", "End Date", "Duration"
+                "Job Number", "Status", "Description", "Job Type", "Start Date", "End Date", "Duration"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -153,8 +177,8 @@ public class jobPanel1 extends javax.swing.JPanel {
         lblPendingJobs.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPendingJobs.setText("Pending Jobs");
 
-        tblJob.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        tblJob.setModel(new javax.swing.table.DefaultTableModel(
+        tblPendingJob.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        tblPendingJob.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -173,26 +197,26 @@ public class jobPanel1 extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tblJob.setGridColor(new java.awt.Color(255, 255, 255));
-        tblJob.addFocusListener(new java.awt.event.FocusAdapter() {
+        tblPendingJob.setGridColor(new java.awt.Color(255, 255, 255));
+        tblPendingJob.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                tblJobFocusGained(evt);
+                tblPendingJobFocusGained(evt);
             }
         });
-        tblJob.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblPendingJob.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblJobMouseClicked(evt);
+                tblPendingJobMouseClicked(evt);
             }
         });
-        tblJob.addKeyListener(new java.awt.event.KeyAdapter() {
+        tblPendingJob.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                tblJobKeyPressed(evt);
+                tblPendingJobKeyPressed(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                tblJobKeyTyped(evt);
+                tblPendingJobKeyTyped(evt);
             }
         });
-        scrollTablePendingJobs.setViewportView(tblJob);
+        scrollTablePendingJobs.setViewportView(tblPendingJob);
 
         btnProduceInvoice.setBackground(new java.awt.Color(255, 255, 255));
         btnProduceInvoice.setText("Produce Invoice");
@@ -280,107 +304,106 @@ public class jobPanel1 extends javax.swing.JPanel {
         btnAllocateMechanic.setBackground(new java.awt.Color(255, 255, 255));
         btnAllocateMechanic.setText("Allocate Mechanic");
 
-        lblCompanyLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/companyLogo.jpg"))); // NOI18N
-
         javax.swing.GroupLayout jobPanelLayout = new javax.swing.GroupLayout(jobPanel);
         jobPanel.setLayout(jobPanelLayout);
         jobPanelLayout.setHorizontalGroup(
             jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jobPanelLayout.createSequentialGroup()
+            .addGroup(jobPanelLayout.createSequentialGroup()
+                .addGap(67, 67, 67)
                 .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jobPanelLayout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPendingJobs, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblPendingJobs, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jobPanelLayout.createSequentialGroup()
+                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jobPanelLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(scrollTablePendingJobs, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jobPanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnProduceInvoice)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnPickJob, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jobPanelLayout.createSequentialGroup()
                                 .addComponent(lblAllJobs)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtSearchAllJob, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblsearchIcon))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jobPanelLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(scrollTableAllJobs, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jobPanelLayout.createSequentialGroup()
-                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtSearchAllJob)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblsearchIcon)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnAddJob, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(scrollTableAllJobs, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jobPanelLayout.createSequentialGroup()
-                                .addGap(99, 99, 99)
-                                .addComponent(lblJobTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jobPanelLayout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addComponent(btnAddJob)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jobPanelLayout.createSequentialGroup()
-                                        .addComponent(lblJobStatus)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cdJobStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblDateBooked)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtDateBooked))
-                                    .addGroup(jobPanelLayout.createSequentialGroup()
-                                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(lblJobNo)
-                                            .addComponent(lblJobDescription))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtJobNo, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(scrollJobDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(jobPanelLayout.createSequentialGroup()
-                                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblJobCustomerName)
-                                            .addComponent(lblTelephoneNo)
-                                            .addComponent(lblMechanicAllocated))
-                                        .addGap(96, 96, 96)
-                                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtTelephoneNo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtJobCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cbMechanicAllocated, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(jobPanelLayout.createSequentialGroup()
-                                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jobPanelLayout.createSequentialGroup()
-                                                .addComponent(lblMake)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtMake, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(lblModel))
-                                            .addComponent(lblVehicleRegNo))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtVehicleRegNo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addGap(31, 31, 31))
-                    .addGroup(jobPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(10, 10, 10)
+                                .addComponent(scrollTablePendingJobs, javax.swing.GroupLayout.DEFAULT_SIZE, 931, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
                         .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnProduceInvoice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnPickJob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAlterJob)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAllocateMechanic)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblCompanyLogo)
-                        .addGap(77, 77, 77))))
+                            .addGroup(jobPanelLayout.createSequentialGroup()
+                                .addComponent(lblJobStatus)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cdJobStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblDateBooked)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtDateBooked))
+                            .addGroup(jobPanelLayout.createSequentialGroup()
+                                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblJobNo)
+                                    .addComponent(lblJobDescription))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtJobNo, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(scrollJobDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jobPanelLayout.createSequentialGroup()
+                                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblJobCustomerName)
+                                    .addComponent(lblTelephoneNo)
+                                    .addComponent(lblMechanicAllocated))
+                                .addGap(96, 96, 96)
+                                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtTelephoneNo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtJobCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbMechanicAllocated, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jobPanelLayout.createSequentialGroup()
+                                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jobPanelLayout.createSequentialGroup()
+                                        .addComponent(lblMake)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtMake, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblModel))
+                                    .addComponent(lblVehicleRegNo))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtVehicleRegNo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jobPanelLayout.createSequentialGroup()
+                                .addComponent(btnAlterJob, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAllocateMechanic, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblJobTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(31, 31, 31))))
         );
         jobPanelLayout.setVerticalGroup(
             jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jobPanelLayout.createSequentialGroup()
-                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jobPanelLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
+                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jobPanelLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(lblJobTitle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblJobNo)
                             .addComponent(txtJobNo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(jobPanelLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblAllJobs)
+                                .addComponent(txtSearchAllJob, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblsearchIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAddJob, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)))
+                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jobPanelLayout.createSequentialGroup()
                         .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblDateBooked)
@@ -413,73 +436,56 @@ public class jobPanel1 extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblMechanicAllocated)
-                            .addComponent(cbMechanicAllocated, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jobPanelLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAddJob, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(104, 104, 104)))
-                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbMechanicAllocated, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAlterJob, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAllocateMechanic, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(859, 859, 859))
                     .addGroup(jobPanelLayout.createSequentialGroup()
-                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jobPanelLayout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(btnProduceInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jobPanelLayout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btnAllocateMechanic, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnAlterJob, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(scrollTableAllJobs, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPickJob, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jobPanelLayout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(lblCompanyLogo)))
-                .addGap(752, 752, 752))
-            .addGroup(jobPanelLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblAllJobs)
-                        .addComponent(txtSearchAllJob, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblsearchIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollTableAllJobs, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblPendingJobs)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollTablePendingJobs, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblPendingJobs)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(scrollTablePendingJobs, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jobPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnPickJob, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnProduceInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jobPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jobPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jobPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jobPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tblAllJobsFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblAllJobsFocusGained
+    private void txtJobCustomerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJobCustomerNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tblAllJobsFocusGained
+    }//GEN-LAST:event_txtJobCustomerNameActionPerformed
 
-    private void tblAllJobsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAllJobsMouseClicked
+    private void tblPendingJobKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblPendingJobKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_tblAllJobsMouseClicked
+    }//GEN-LAST:event_tblPendingJobKeyTyped
 
-    private void tblAllJobsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblAllJobsKeyPressed
+    private void tblPendingJobKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblPendingJobKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tblAllJobsKeyPressed
+    }//GEN-LAST:event_tblPendingJobKeyPressed
 
-    private void tblAllJobsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblAllJobsKeyTyped
+    private void tblPendingJobMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPendingJobMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_tblAllJobsKeyTyped
+    }//GEN-LAST:event_tblPendingJobMouseClicked
+
+    private void tblPendingJobFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblPendingJobFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblPendingJobFocusGained
 
     private void btnAddJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddJobActionPerformed
         controller.closeDBConnection();
@@ -490,25 +496,120 @@ public class jobPanel1 extends javax.swing.JPanel {
         openAddJob.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_btnAddJobActionPerformed
 
-    private void tblJobFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblJobFocusGained
+    private void tblAllJobsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblAllJobsKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_tblJobFocusGained
+    }//GEN-LAST:event_tblAllJobsKeyTyped
 
-    private void tblJobMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblJobMouseClicked
+    private void tblAllJobsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblAllJobsKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tblJobMouseClicked
+    }//GEN-LAST:event_tblAllJobsKeyPressed
 
-    private void tblJobKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblJobKeyPressed
+    private void tblAllJobsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAllJobsMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_tblJobKeyPressed
 
-    private void tblJobKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblJobKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tblJobKeyTyped
+        // Get VehicleID & CustomerID from Job
+        // Then display them on the relevant fields
 
-    private void txtJobCustomerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJobCustomerNameActionPerformed
+        String vehicleID = null;
+        String mechanicID = null;
+        System.out.println(vehicleID);
+        String customerID = null;
+        String jobID = tblAllJobs.getValueAt(tblAllJobs.getSelectedRow(), 0).toString();
+        try {
+            conn = DriverManager.getConnection(DatabaseURL);
+            pstm = conn.prepareStatement("SELECT vehicleID,customerID, staffID FROM Job WHERE jobNo = ?"); //query to select the staff memebers dependednt on the login and password
+            pstm.setString(1, jobID);
+            rs = pstm.executeQuery(); // get the infor from database
+            System.out.println("Login Executed");
+            System.out.println(rs);
+            while(rs.next()){
+                System.out.print(rs.getString("vehicleID"));
+                vehicleID = rs.getString("vehicleID");
+                customerID = rs.getString("customerID");
+                mechanicID = rs.getString("staffID");
+            }
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e + " AAAAAAAAAAAAAAAAA");
+        }
+        System.out.println(vehicleID);
+        System.out.println(customerID);
+
+        // Get Customer's Details
+        String name = null;
+        String phoneNumber = null;
+        try {
+            conn = DriverManager.getConnection(DatabaseURL);
+            pstm = conn.prepareStatement("SELECT name,phoneNumber FROM Customer WHERE customerID = ?"); //query to select the staff memebers dependednt on the login and password
+            pstm.setString(1, customerID);
+            rs = pstm.executeQuery(); // get the infor from database
+            System.out.println("Login Executed");
+            System.out.println(rs);
+            while(rs.next()){
+                name = rs.getString("name");
+                phoneNumber = rs.getString("phoneNumber");
+            }
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e + "BBBBBBBBBBBBBB");
+        }
+        txtJobCustomerName.setText(name);
+        txtTelephoneNo.setText(phoneNumber);
+
+        // Get Vehicle Detail
+        String regNumber = null;
+        String vehicleMake = null;
+        String vehicleModel = null;
+        try {
+            conn = DriverManager.getConnection(DatabaseURL);
+            pstm = conn.prepareStatement("SELECT regNumber,vehicleMake,vehicleModel FROM Vehicle WHERE vehicleID = ?"); //query to select the staff memebers dependednt on the login and password
+            pstm.setString(1, vehicleID);
+            rs = pstm.executeQuery(); // get the infor from database
+            System.out.println("Login Executed");
+            System.out.println(rs);
+            while(rs.next()){
+                regNumber = rs.getString("regNumber");
+                vehicleMake = rs.getString("vehicleMake");
+                vehicleModel = rs.getString("vehicleModel");
+            }
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e + "CCCCCCCCCCCCCC");
+        }
+        txtMake.setText(vehicleMake);
+        txtModel.setText(vehicleModel);
+        txtVehicleRegNo.setText(regNumber);
+
+        txtJobNo.setText(tblAllJobs.getValueAt(tblAllJobs.getSelectedRow(), 0).toString());
+        cdJobStatus.setSelectedItem(tblAllJobs.getValueAt(tblAllJobs.getSelectedRow(), 1).toString());
+        txtJobDescription.setText(tblAllJobs.getValueAt(tblAllJobs.getSelectedRow(), 2).toString());
+
+        // Get Mechanic allocated for the task
+        String mechanicName = null;
+        try {
+            conn = DriverManager.getConnection(DatabaseURL);
+            pstm = conn.prepareStatement("SELECT StaffName FROM Staff WHERE staffID = ?"); //query to select the staff memebers dependednt on the login and password
+            pstm.setString(1, mechanicID);
+            rs = pstm.executeQuery(); // get the infor from database
+            System.out.println(rs);
+            while(rs.next()){
+                mechanicName = rs.getString("StaffName");
+            }
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e + "mechanicID");
+        }
+        System.out.println(mechanicID);
+
+        System.out.println(mechanicName);
+        cbMechanicAllocated.setSelectedItem(mechanicName);
+
+    }//GEN-LAST:event_tblAllJobsMouseClicked
+
+    private void tblAllJobsFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblAllJobsFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtJobCustomerNameActionPerformed
+    }//GEN-LAST:event_tblAllJobsFocusGained
+
+    private void txtSearchAllJobKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchAllJobKeyReleased
+        // TODO add your handling code here:
+                tblAllJobs.setModel(DbUtils.resultSetToTableModel(controller.searchJob(txtSearchAllJob.getText())));
+    }//GEN-LAST:event_txtSearchAllJobKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -521,7 +622,6 @@ public class jobPanel1 extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cdJobStatus;
     private javax.swing.JPanel jobPanel;
     private javax.swing.JLabel lblAllJobs;
-    private javax.swing.JLabel lblCompanyLogo;
     private javax.swing.JLabel lblDateBooked;
     private javax.swing.JLabel lblJobCustomerName;
     private javax.swing.JLabel lblJobDescription;
@@ -539,7 +639,7 @@ public class jobPanel1 extends javax.swing.JPanel {
     private javax.swing.JScrollPane scrollTableAllJobs;
     private javax.swing.JScrollPane scrollTablePendingJobs;
     private javax.swing.JTable tblAllJobs;
-    private javax.swing.JTable tblJob;
+    private javax.swing.JTable tblPendingJob;
     private javax.swing.JTextField txtDateBooked;
     private javax.swing.JTextField txtJobCustomerName;
     private javax.swing.JTextArea txtJobDescription;

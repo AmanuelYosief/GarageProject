@@ -32,12 +32,17 @@ public interface DBConnection {
     public ResultSet selectCustomer() throws SQLException;
     
     
-    
-    
+    ResultSet displayStock() throws SQLException;
+    ResultSet searchStock(String value) throws SQLException;
     
 
     boolean addJob(String statusOfJob, String jobDescription, String jobType, String mechanicID, String vehicleID, String customerId);
-
-    public ResultSet displayJob() throws SQLException;     
+    public ResultSet searchJob(String value) throws SQLException;
+    
+    
+    
+    
+    public ResultSet displayJob() throws SQLException;    
+    public ResultSet displayPendingJob() throws SQLException;  
     boolean addVehicle(String regNumber, String vehicleMake, String vehicleModel, String engSerial, String chassisNumber, String colour, String customerID);
             }

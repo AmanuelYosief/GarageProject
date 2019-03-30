@@ -61,6 +61,24 @@ public class MyDBConnection implements DBConnection {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+        @Override
+    public ResultSet displayStock() throws SQLException {
+
+        try {
+            conn = DriverManager.getConnection(DatabaseURL);
+            stm = conn.createStatement();
+            rs = stm.executeQuery("SELECT partName, numPartsListed, initialStockLevel, usedStock, threshold, delivery FROM Stock");
+            System.out.println("display Stock Executed");
+            return rs;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.toString(), "SQL Exception", JOptionPane.WARNING_MESSAGE);
+        }
+
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    
     @Override
     public ResultSet searchStaff(String value) throws SQLException {
 
@@ -190,7 +208,7 @@ public class MyDBConnection implements DBConnection {
         try {
             conn = DriverManager.getConnection(DatabaseURL);
             stm = conn.createStatement();
-            rs = stm.executeQuery("Select customerID, name, address, postCode, phoneNumber, homeNumber, payLater FROM Customer");
+            rs = stm.executeQuery("Select customerID, name, address, postCode, phoneNumber, homeNumber, payLater, discountPlan FROM Customer INNER JOIN Discount on Discount.discountID = Customer.discountID");
             System.out.println("displayAllStaff Executed");
             return rs;
         } catch (SQLException ex) {
@@ -222,7 +240,7 @@ public class MyDBConnection implements DBConnection {
         try {
             conn = DriverManager.getConnection(DatabaseURL);
             System.out.println(" SearchAll Customer connection established");
-            pstm = conn.prepareStatement("Select customerID ,name, address, postCode,phoneNumber,homeNumber FROM Customer WHERE customerID LIKE ? OR name LIKE ? OR address LIKE ? OR postCode LIKE ? OR phoneNumber LIKE ? OR homeNumber LIKE ?");
+            pstm = conn.prepareStatement("Select customerID ,name, address, postCode,phoneNumber,homeNumber, payLater, discountPlan FROM Customer INNER JOIN Discount on Discount.discountID = Customer.discountID WHERE customerID LIKE ? OR name LIKE ? OR address LIKE ? OR postCode LIKE ? OR phoneNumber LIKE ? OR homeNumber LIKE ?");
             pstm.setString(1, '%' + value + '%');
             pstm.setString(2, '%' + value + '%');
             pstm.setString(3, '%' + value + '%');
@@ -238,6 +256,9 @@ public class MyDBConnection implements DBConnection {
         }
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
+    
 
     @Override
     public boolean updateCustomer(String name, String address, String postCode, String phoneNumber, String homeNumber, String customerID) {
@@ -276,7 +297,7 @@ public class MyDBConnection implements DBConnection {
 
             conn = DriverManager.getConnection(DatabaseURL);
             System.err.println("Prior Update Query");
-            pstm = conn.prepareStatement("UPDATE Customer SET name = ?, address = ? , postCode = ?, phoneNumber = ?, homeNumber = ?, payLater = ?, discountID = ? WHERE customerID = ?");
+            pstm = conn.prepareStatement("UPDATE Customer SET name = ?, address = ? , postCode = ?, phoneNumber = ?, homeNumber = ?, payLater = ? WHERE customerID = ?");
             System.err.println("After Update Query");
             pstm.setString(1, name);
             pstm.setString(2, address);
@@ -284,16 +305,51 @@ public class MyDBConnection implements DBConnection {
             pstm.setString(4, phoneNumber);
             pstm.setString(5, homeNumber);
             pstm.setString(6, payLater);
-            pstm.setString(5, discountPlan);
-            pstm.setString(6, customerID);
+            pstm.setString(7, customerID);
             System.err.print(conn.toString() + "\n" + pstm.toString() + "\n" + rs.toString());
             pstm.execute();
-            return true;
+            //return true;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.toString(), "SQL Update Exception", JOptionPane.WARNING_MESSAGE);
         }
+        
+        
 
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String getDiscountID = null;
+        try {
+            conn = DriverManager.getConnection(DatabaseURL);
+            pstm = conn.prepareStatement("SELECT discountID FROM Customer WHERE customerID = ?"); //query to select the staff memebers dependednt on the login and password
+            pstm.setString(1, customerID);
+            rs = pstm.executeQuery(); // get the infor from database
+            System.out.println("Login Executed");
+            System.out.println(rs);
+            while(rs.next()){
+            getDiscountID = rs.getString("discountID");
+            }
+        }catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e + " AAAAAAAAAAAAAAAAA");
+    } 
+        JOptionPane.showMessageDialog(null, getDiscountID + "      AAAAAAAAAAAAAAAAA");
+        try{
+        pstm.close();
+            rs.close();
+
+            conn = DriverManager.getConnection(DatabaseURL);
+            System.err.println("Prior Update Query");
+            pstm = conn.prepareStatement("UPDATE Discount SET discountPlan = ? WHERE discountID = ?");
+            pstm.setString(1, discountPlan);
+            pstm.setString(2, getDiscountID);
+            pstm.execute();
+        
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex + " BBBBBBBBBBBBBBBBBBB");
+        }
+        
+        
+        
+        
+        return true;
+       
     }
 
     @Override
@@ -327,7 +383,7 @@ public class MyDBConnection implements DBConnection {
         try {
             conn = DriverManager.getConnection(DatabaseURL);
             stm = conn.createStatement();
-            rs = stm.executeQuery("Select jobNo, statusOfJob, jobDescription, jobType, startDate, endDate, jobDuration FROM Job");
+            rs = stm.executeQuery("SELECT jobNo,statusOfJob, jobDescription, vehicleMake, vehicleModel, regNumber, staffName, name, phoneNumber FROM Job INNER JOIN Customer on Customer.customerID = Job.customerID INNER JOIN Staff on Staff.staffID = Job.staffID INNER JOIN Vehicle on Vehicle.vehicleID = Job.vehicleID");
             System.out.println("displayAllStaff Executed");
             return rs;
         } catch (SQLException ex) {
@@ -362,4 +418,73 @@ public class MyDBConnection implements DBConnection {
         }
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public ResultSet displayPendingJob() throws SQLException {
+        
+         try {
+            conn = DriverManager.getConnection(DatabaseURL);
+            stm = conn.createStatement();
+            rs = stm.executeQuery("SELECT jobNo,statusOfJob, jobDescription, vehicleMake, vehicleModel, regNumber, staffName, name, phoneNumber FROM Job INNER JOIN Customer on Customer.customerID = Job.customerID INNER JOIN Staff on Staff.staffID = Job.staffID INNER JOIN Vehicle on Vehicle.vehicleID = Job.vehicleID WHERE statusOfJob = 'Pending'");
+            System.out.println("displayAllStaff Executed");
+            return rs;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.toString(), "SQL Exception", JOptionPane.WARNING_MESSAGE);
+        }
+
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ResultSet searchJob(String value) throws SQLException {
+        
+        try {
+            conn = DriverManager.getConnection(DatabaseURL);
+            System.out.println(" SearchAll Staff connection established");
+            pstm = conn.prepareStatement("SELECT jobNo,statusOfJob, jobDescription, vehicleMake, vehicleModel, regNumber, staffName, name, phoneNumber FROM Job INNER JOIN Customer on Customer.customerID = Job.customerID INNER JOIN Staff on Staff.staffID = Job.staffID INNER JOIN Vehicle on Vehicle.vehicleID = Job.vehicleID WHERE jobNo LIKE ? OR statusOfJob LIKE ? OR jobDescription LIKE ? OR vehicleMake LIKE ? OR vehicleModel LIKE ? OR regNumber LIKE ? OR staffName LIKE ? OR name LIKE ? OR phoneNumber LIKE ?");
+            pstm.setString(1, '%' + value + '%');
+            pstm.setString(2, '%' + value + '%');
+            pstm.setString(3, '%' + value + '%');
+                        pstm.setString(4, '%' + value + '%');
+            pstm.setString(5, '%' + value + '%');
+            pstm.setString(6, '%' + value + '%');
+                        pstm.setString(1, '%' + value + '%');
+            pstm.setString(7, '%' + value + '%');
+            pstm.setString(8, '%' + value + '%');
+            pstm.setString(9, '%' + value + '%');
+            rs = pstm.executeQuery();
+
+            return rs;
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.toString(), "SQL Exception 1", JOptionPane.WARNING_MESSAGE);
+        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+        @Override
+    public ResultSet searchStock(String value) throws SQLException {
+
+        try {
+            conn = DriverManager.getConnection(DatabaseURL);
+            System.out.println(" SearchAll Staff connection established");
+            pstm = conn.prepareStatement("SELECT partName, numPartsListed, initialStockLevel, usedStock, threshold, delivery FROM Stock WHERE partName LIKE ? OR numPartsListed LIKE ? OR initialStockLevel LIKE ? OR usedStock LIKE ? OR threshold LIKE ? OR delivery LIKE ?");
+            pstm.setString(1, '%' + value + '%');
+            pstm.setString(2, '%' + value + '%');
+            pstm.setString(3, '%' + value + '%');
+            pstm.setString(4, '%' + value + '%');
+            pstm.setString(5, '%' + value + '%');
+            pstm.setString(6, '%' + value + '%');
+            rs = pstm.executeQuery();
+
+            return rs;
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.toString(), "SQL Exception 1", JOptionPane.WARNING_MESSAGE);
+        }
+
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }

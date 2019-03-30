@@ -10,6 +10,7 @@ import GUI.Panels.jobPanel1;
 import GUI.Panels.customerPlusPanel;
 import GUI.Panels.reportsPanel;
 import GUI.Panels.stockPanel;
+import java.awt.Color;
 
 /**
  *
@@ -38,7 +39,10 @@ public class FranchiseeForm extends javax.swing.JFrame {
         tabbedFranchiseePanel.addTab("Customer", p2);
         tabbedFranchiseePanel.addTab("Stock", p3);
         tabbedFranchiseePanel.addTab("Reports", p4);
+        
 
+        
+ 
 
     }
 
@@ -76,7 +80,7 @@ public class FranchiseeForm extends javax.swing.JFrame {
             franchiseePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(franchiseePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 1171, Short.MAX_VALUE)
+                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(tabbedFranchiseePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );

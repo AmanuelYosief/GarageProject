@@ -6,14 +6,22 @@
             <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/ForepersonForm.java</file>
             <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/Panels/jobPanel.java</file>
             <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/FranchiseeForm.java</file>
-            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/AlterJobForm.java</file>
-            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/AddJobForm.java</file>
-            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/Panels/stockPanel.java</file>
+            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/Panels/stockReportPanel.java</file>
+            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/Panels/jobReportPanel.java</file>
             <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/Panels/customerPlusPanel.java</file>
+            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/Panels/stockPanel.java</file>
+            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/Database/MyDBConnection.java</file>
+            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/Panels/customerPanel.java</file>
+            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/ReportSparePartForm.java</file>
+            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/Panels/vehicleReportPanel.java</file>
+            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/ReceptionistForm.java</file>
+            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/InvoiceForm.java</file>
+            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/LoginForm.java</file>
             <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/Panels/jobPanel1.java</file>
             <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/MechanicForm.java</file>
-            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/Panels/customerPanel.java</file>
             <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/Panels/jobPlusPanel.java</file>
+            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/Panels/reportsPanel.java</file>
+            <file>file:/C:/Users/amenu/OneDrive/Documents/NetBeansProjects/GarageProject/src/GUI/PartOrderForm.java</file>
         </group>
     </open-files>
 </project-private>

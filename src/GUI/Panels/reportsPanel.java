@@ -5,6 +5,8 @@
  */
 package GUI.Panels;
 
+import java.awt.Color;
+
 /**
  *
  * @author amenu
@@ -31,7 +33,6 @@ public class reportsPanel extends javax.swing.JPanel {
         tabbedReportPanel.addTab("Vehicle", p2);
         tabbedReportPanel.addTab("Job", p3);
 
-
     }
 
     /**
@@ -45,6 +46,9 @@ public class reportsPanel extends javax.swing.JPanel {
 
         tabbedReportPanel = new javax.swing.JTabbedPane();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        tabbedReportPanel.setBackground(new java.awt.Color(255, 255, 255));
         tabbedReportPanel.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -61,40 +65,6 @@ public class reportsPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGenerateReport3;
-    private javax.swing.JButton btnGenerateReport4;
-    private javax.swing.JButton btnPrintReport2;
-    private javax.swing.JButton btnPrintReport3;
-    private javax.swing.JComboBox<String> cbMechanicPicker;
-    private javax.swing.JComboBox<String> cbMechanicPicker1;
-    private javax.swing.JComboBox<String> cbMonthPicker3;
-    private javax.swing.JComboBox<String> cbMonthPicker4;
-    private javax.swing.JComboBox<String> cbYearPicker3;
-    private javax.swing.JComboBox<String> cbYearPicker4;
-    private javax.swing.JPanel jobReportPanel;
-    private javax.swing.JPanel jobReportPanel1;
-    private javax.swing.JLabel lblCompanyLogo10;
-    private javax.swing.JLabel lblCompanyLogo8;
-    private javax.swing.JLabel lblDate3;
-    private javax.swing.JLabel lblDate4;
-    private javax.swing.JLabel lblFilter2;
-    private javax.swing.JLabel lblFilter3;
-    private javax.swing.JLabel lblJobType;
-    private javax.swing.JLabel lblJobType1;
-    private javax.swing.JRadioButton rbAnnualService2;
-    private javax.swing.JRadioButton rbAnnualService3;
-    private javax.swing.JRadioButton rbMOT2;
-    private javax.swing.JRadioButton rbMOT3;
-    private javax.swing.JRadioButton rbMechanic;
-    private javax.swing.JRadioButton rbMechanic2;
-    private javax.swing.JRadioButton rbOverall2;
-    private javax.swing.JRadioButton rbOverall3;
-    private javax.swing.JRadioButton rbRepair2;
-    private javax.swing.JRadioButton rbRepair3;
-    private javax.swing.JScrollPane scrollTableJob;
-    private javax.swing.JScrollPane scrollTableJob1;
     private javax.swing.JTabbedPane tabbedReportPanel;
-    private javax.swing.JTable tblJob;
-    private javax.swing.JTable tblJob1;
     // End of variables declaration//GEN-END:variables
 }

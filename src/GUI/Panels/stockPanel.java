@@ -5,6 +5,9 @@
  */
 package GUI.Panels;
 
+import Controller.controller;
+import net.proteanit.sql.DbUtils;
+
 /**
  *
  * @author amenu
@@ -16,8 +19,12 @@ public class stockPanel extends javax.swing.JPanel {
      */
     public stockPanel() {
         initComponents();
+        fetchAll();
     }
-
+    
+        public void fetchAll() {
+        tblStock.setModel(DbUtils.resultSetToTableModel(controller.displayStock()));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,13 +57,19 @@ public class stockPanel extends javax.swing.JPanel {
         btnUpdatePart = new javax.swing.JButton();
         btnPartOrder = new javax.swing.JButton();
         btnReportPart = new javax.swing.JButton();
-        lblCompanyLogo = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         stockPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         lblsearchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/searchIcon.png"))); // NOI18N
 
         txtSearchStock.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
+        txtSearchStock.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchStockKeyReleased(evt);
+            }
+        });
 
         tblStock.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         tblStock.setModel(new javax.swing.table.DefaultTableModel(
@@ -160,72 +173,68 @@ public class stockPanel extends javax.swing.JPanel {
         btnReportPart.setBackground(new java.awt.Color(255, 255, 255));
         btnReportPart.setText("Report Part");
 
-        lblCompanyLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/companyLogo.jpg"))); // NOI18N
-
         javax.swing.GroupLayout stockPanelLayout = new javax.swing.GroupLayout(stockPanel);
         stockPanel.setLayout(stockPanelLayout);
         stockPanelLayout.setHorizontalGroup(
             stockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(stockPanelLayout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addGap(134, 134, 134)
+                .addComponent(lblsearchIcon)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(scrollTableStock, javax.swing.GroupLayout.DEFAULT_SIZE, 783, Short.MAX_VALUE)
+                    .addComponent(txtSearchStock))
                 .addGroup(stockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(stockPanelLayout.createSequentialGroup()
-                        .addComponent(lblsearchIcon)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSearchStock))
-                    .addComponent(scrollTableStock, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(stockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(stockPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(stockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblStockTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stockPanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnUpdatePart, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stockPanelLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(stockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnReportPart, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnPartOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblCompanyLogo)))
-                        .addContainerGap())
+                            .addComponent(btnReportPart, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPartOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(stockPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                        .addGroup(stockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPartName, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblStockUsed, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblThreshold, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblInitialStock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblNewStockLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(stockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtThreshold, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNewStockLevel, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtStockUsed, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtInitialStock, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtQuantity, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPartName, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(94, Short.MAX_VALUE))))
+                        .addGap(45, 45, 45)
+                        .addGroup(stockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(stockPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnUpdatePart, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(stockPanelLayout.createSequentialGroup()
+                                .addGroup(stockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblPartName, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblStockUsed, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblThreshold, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblInitialStock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblNewStockLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(stockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtThreshold, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNewStockLevel, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtStockUsed, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtInitialStock, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtQuantity, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPartName, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(stockPanelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(lblStockTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         stockPanelLayout.setVerticalGroup(
             stockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stockPanelLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(stockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(stockPanelLayout.createSequentialGroup()
-                        .addComponent(lblsearchIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(3, 3, 3))
-                    .addComponent(txtSearchStock, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblStockTitle))
                 .addGroup(stockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(stockPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scrollTableStock, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(35, 35, 35)
+                        .addComponent(lblStockTitle)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stockPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(stockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblsearchIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSearchStock, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(3, 3, 3)))
+                .addGroup(stockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(stockPanelLayout.createSequentialGroup()
-                        .addGap(32, 32, 32)
                         .addGroup(stockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPartName)
                             .addComponent(txtPartName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -253,27 +262,25 @@ public class stockPanel extends javax.swing.JPanel {
                         .addGroup(stockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblDelivery)
                             .addComponent(txtDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                        .addComponent(btnUpdatePart, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(stockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCompanyLogo, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stockPanelLayout.createSequentialGroup()
-                                .addComponent(btnPartOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnReportPart, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                        .addComponent(btnUpdatePart, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnPartOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnReportPart, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(scrollTableStock, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(stockPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(stockPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(stockPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(stockPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -283,11 +290,19 @@ public class stockPanel extends javax.swing.JPanel {
 
     private void tblStockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblStockMouseClicked
         // TODO add your handling code here:
-        lblStaffId.setText(tblStaff.getValueAt(tblStaff.getSelectedRow(), 0).toString());
-        txtFirstName.setText(tblStaff.getValueAt(tblStaff.getSelectedRow(), 1).toString());
-        txtSurname.setText(tblStaff.getValueAt(tblStaff.getSelectedRow(), 2).toString());
-        txtEmail.setText(tblStaff.getValueAt(tblStaff.getSelectedRow(), 3).toString());
-        cdJobStatus.getModel().setSelectedItem(tblStaff.getValueAt(tblStaff.getSelectedRow(), 4).toString());
+        txtPartName.setText(tblStock.getValueAt(tblStock.getSelectedRow(), 0).toString());
+        txtQuantity.setText(tblStock.getValueAt(tblStock.getSelectedRow(), 1).toString());
+        txtInitialStock.setText(tblStock.getValueAt(tblStock.getSelectedRow(), 2).toString());
+
+
+        
+        txtStockUsed.setText(tblStock.getValueAt(tblStock.getSelectedRow(), 3).toString());
+        txtThreshold.setText(tblStock.getValueAt(tblStock.getSelectedRow(), 2).toString());
+        txtDelivery.setText(tblStock.getValueAt(tblStock.getSelectedRow(), 3).toString());
+        int Stock=Integer.parseInt(txtInitialStock.getText());
+        int Used=Integer.parseInt(txtStockUsed.getText());
+        int result = Stock - Used;
+        txtNewStockLevel.setText(result+"");
     }//GEN-LAST:event_tblStockMouseClicked
 
     private void tblStockKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblStockKeyPressed
@@ -296,18 +311,24 @@ public class stockPanel extends javax.swing.JPanel {
 
     private void tblStockKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblStockKeyTyped
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_tblStockKeyTyped
 
     private void txtPartNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPartNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPartNameActionPerformed
 
+    private void txtSearchStockKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchStockKeyReleased
+        // TODO add your handling code here:
+        
+        tblStock.setModel(DbUtils.resultSetToTableModel(controller.searchStock(txtSearchStock.getText())));
+    }//GEN-LAST:event_txtSearchStockKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPartOrder;
     private javax.swing.JButton btnReportPart;
     private javax.swing.JButton btnUpdatePart;
-    private javax.swing.JLabel lblCompanyLogo;
     private javax.swing.JLabel lblDelivery;
     private javax.swing.JLabel lblInitialStock;
     private javax.swing.JLabel lblNewStockLevel;

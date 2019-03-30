@@ -43,7 +43,8 @@ public class jobReportPanel extends javax.swing.JPanel {
         scrollTableJob = new javax.swing.JScrollPane();
         tblJob = new javax.swing.JTable();
         btnPrintReport = new javax.swing.JButton();
-        lblCompanyLogo8 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jobReportPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -147,8 +148,6 @@ public class jobReportPanel extends javax.swing.JPanel {
             }
         });
 
-        lblCompanyLogo8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/companyLogo.jpg"))); // NOI18N
-
         javax.swing.GroupLayout jobReportPanelLayout = new javax.swing.GroupLayout(jobReportPanel);
         jobReportPanel.setLayout(jobReportPanelLayout);
         jobReportPanelLayout.setHorizontalGroup(
@@ -183,14 +182,8 @@ public class jobReportPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)))
                 .addComponent(scrollTableJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jobReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jobReportPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lblCompanyLogo8))
-                    .addGroup(jobReportPanelLayout.createSequentialGroup()
-                        .addComponent(btnPrintReport, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 135, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addComponent(btnPrintReport, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(145, Short.MAX_VALUE))
         );
         jobReportPanelLayout.setVerticalGroup(
             jobReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,15 +216,10 @@ public class jobReportPanel extends javax.swing.JPanel {
                                 .addComponent(cbMechanicPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnPrintReport, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jobReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jobReportPanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(lblCompanyLogo8))
-                            .addGroup(jobReportPanelLayout.createSequentialGroup()
-                                .addComponent(btnGenerateReport, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(btnGenerateReport, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jobReportPanelLayout.createSequentialGroup()
-                        .addComponent(scrollTableJob, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                        .addComponent(scrollTableJob, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
                         .addGap(49, 49, 49))))
         );
 
@@ -241,19 +229,13 @@ public class jobReportPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1181, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jobReportPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jobReportPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
+            .addGap(0, 491, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jobReportPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jobReportPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -294,7 +276,6 @@ public class jobReportPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbMonthPicker;
     private javax.swing.JComboBox<String> cbYearPicker;
     private javax.swing.JPanel jobReportPanel;
-    private javax.swing.JLabel lblCompanyLogo8;
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblFilter;
     private javax.swing.JLabel lblJobType;

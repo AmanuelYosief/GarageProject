@@ -60,13 +60,19 @@ public class customerPlusPanel extends javax.swing.JPanel {
         lblDiscountPlan = new javax.swing.JLabel();
         cbDiscountPlan = new javax.swing.JComboBox<>();
         btnUpdateCustomer = new javax.swing.JButton();
-        lblCompanyLogo = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         customerPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         lblsearchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/searchIcon.png"))); // NOI18N
 
         txtSearchCustomer.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
+        txtSearchCustomer.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchCustomerKeyReleased(evt);
+            }
+        });
 
         btnAddCustomer.setBackground(new java.awt.Color(255, 255, 255));
         btnAddCustomer.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
@@ -178,111 +184,100 @@ public class customerPlusPanel extends javax.swing.JPanel {
             }
         });
 
-        lblCompanyLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/companyLogo.jpg"))); // NOI18N
-
         javax.swing.GroupLayout customerPanelLayout = new javax.swing.GroupLayout(customerPanel);
         customerPanel.setLayout(customerPanelLayout);
         customerPanelLayout.setHorizontalGroup(
             customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(customerPanelLayout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(customerPanelLayout.createSequentialGroup()
                         .addComponent(lblsearchIcon)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSearchCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtSearchCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAddCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(scrollTableCustomer))
-                .addGap(60, 60, 60)
+                    .addComponent(scrollTableCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 777, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(customerPanelLayout.createSequentialGroup()
                         .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCustomerTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(customerPanelLayout.createSequentialGroup()
-                                .addComponent(lblCustomerAddress)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(scrollCustomeAddress))
-                            .addGroup(customerPanelLayout.createSequentialGroup()
-                                .addComponent(lblPostCode)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
-                                .addComponent(txtCustomerPostCode, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerPanelLayout.createSequentialGroup()
-                                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCustomerName)
-                                    .addComponent(lblCustomerPhoneNumber))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblCustomerName)
+                            .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(customerPanelLayout.createSequentialGroup()
+                                    .addComponent(lblPostCode)
+                                    .addGap(40, 40, 40))
+                                .addComponent(lblCustomerPhoneNumber, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerPanelLayout.createSequentialGroup()
+                                    .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblFaxNumber)
+                                        .addComponent(lblPayLater)
+                                        .addComponent(lblDiscountPlan))
+                                    .addGap(3, 3, 3))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtCustomerPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                .addComponent(txtCustomerName))
+                            .addComponent(txtCustomerPostCode, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnUpdateCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCustomerPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(txtCustomerName)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerPanelLayout.createSequentialGroup()
-                                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblFaxNumber)
-                                    .addComponent(lblPayLater)
-                                    .addComponent(lblDiscountPlan))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnUpdateCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(cbDiscountPlan, 0, 200, Short.MAX_VALUE)
-                                        .addComponent(cbPayLater, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtCustomerHomeNumber, javax.swing.GroupLayout.Alignment.TRAILING)))))
-                        .addGap(22, 22, 22))
+                                    .addComponent(cbDiscountPlan, 0, 200, Short.MAX_VALUE)
+                                    .addComponent(cbPayLater, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCustomerHomeNumber, javax.swing.GroupLayout.Alignment.TRAILING)))))
                     .addGroup(customerPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lblCompanyLogo)))
-                .addContainerGap())
+                        .addComponent(lblCustomerAddress)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(scrollCustomeAddress))
+                    .addComponent(lblCustomerTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(32, 32, 32))
         );
         customerPanelLayout.setVerticalGroup(
             customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(customerPanelLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(customerPanelLayout.createSequentialGroup()
-                        .addComponent(lblsearchIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(3, 3, 3))
-                    .addComponent(txtSearchCustomer)
-                    .addComponent(btnAddCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtSearchCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAddCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblsearchIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerPanelLayout.createSequentialGroup()
-                        .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(customerPanelLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(customerPanelLayout.createSequentialGroup()
-                                        .addComponent(lblCustomerAddress)
-                                        .addGap(77, 77, 77))
-                                    .addComponent(scrollCustomeAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblCustomerPhoneNumber)
-                                    .addComponent(txtCustomerPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtCustomerPostCode, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblPostCode))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblFaxNumber)
-                                    .addComponent(txtCustomerHomeNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(cbPayLater, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblPayLater))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblDiscountPlan)
-                                    .addComponent(cbDiscountPlan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(btnUpdateCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(scrollTableCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE))
-                        .addGap(23, 23, 23))
+                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(customerPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lblCompanyLogo)
-                        .addContainerGap())))
+                        .addGap(8, 8, 8)
+                        .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(customerPanelLayout.createSequentialGroup()
+                                .addComponent(lblCustomerAddress)
+                                .addGap(77, 77, 77))
+                            .addComponent(scrollCustomeAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(customerPanelLayout.createSequentialGroup()
+                                .addComponent(txtCustomerPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCustomerPostCode, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCustomerHomeNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(11, 11, 11)
+                                .addComponent(cbPayLater, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbDiscountPlan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(customerPanelLayout.createSequentialGroup()
+                                .addComponent(lblCustomerPhoneNumber)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblPostCode)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblFaxNumber)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblPayLater)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblDiscountPlan)))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnUpdateCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(scrollTableCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
             .addGroup(customerPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblCustomerTitle)
@@ -297,7 +292,7 @@ public class customerPlusPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1186, Short.MAX_VALUE)
+            .addGap(0, 1208, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -334,6 +329,21 @@ public class customerPlusPanel extends javax.swing.JPanel {
 
     private void tblCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCustomerMouseClicked
         // TODO add your handling code here:
+        
+                txtCustomerName.setText(tblCustomer.getValueAt(tblCustomer.getSelectedRow(), 1).toString());
+        txtCustomerAddress.setText(tblCustomer.getValueAt(tblCustomer.getSelectedRow(), 2).toString());
+        txtCustomerPostCode.setText(tblCustomer.getValueAt(tblCustomer.getSelectedRow(), 3).toString());
+        txtCustomerPhoneNumber.setText(tblCustomer.getValueAt(tblCustomer.getSelectedRow(), 4).toString());
+        txtCustomerHomeNumber.setText(tblCustomer.getValueAt(tblCustomer.getSelectedRow(), 5).toString());
+
+                if(tblCustomer.getValueAt(tblCustomer.getSelectedRow(), 6).toString()== "N")
+                    cbPayLater.setState(false);
+                else 
+                    cbPayLater.setState(true);
+        cbDiscountPlan.setSelectedItem(tblCustomer.getValueAt(tblCustomer.getSelectedRow(), 7).toString());        
+
+            
+        
     }//GEN-LAST:event_tblCustomerMouseClicked
 
     private void tblCustomerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblCustomerKeyPressed
@@ -348,15 +358,19 @@ public class customerPlusPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         String payLater = null;
         if(cbPayLater.getState())
-            payLater = "1";
-        else payLater = "0";
+            payLater = "N";
+        else payLater = "Y";
         
-        String index = Integer.toString(cbDiscountPlan.getSelectedIndex());
+
+        String discountPlan = cbDiscountPlan.getSelectedItem().toString();
+        
+        
         int cd = JOptionPane.showConfirmDialog(null,"Are you sure you want to update this customer?", "Update Customer", JOptionPane.YES_NO_OPTION);
         if (cd == JOptionPane.YES_OPTION ){
+
 //txtCustomerName.getText().trim(), txtCustomerAddress.getText().trim(),txtCustomerPostCode.getText().trim(), txtCustomerPhoneNumber.getText().trim(),txtCustomerHomeNumber.getText().trim()
             try {
-                controller.updateCustomerPlus(txtCustomerName.getText().trim(),txtCustomerAddress.getText().trim(),txtCustomerPostCode.getText().trim(),txtCustomerPhoneNumber.getText().trim(),txtCustomerHomeNumber.getText().trim(), tblCustomer.getValueAt(tblCustomer.getSelectedRow(), 0).toString(), payLater,index );
+                controller.updateCustomerPlus(txtCustomerName.getText().trim(),txtCustomerAddress.getText().trim(),txtCustomerPostCode.getText().trim(),txtCustomerPhoneNumber.getText().trim(),txtCustomerHomeNumber.getText().trim(), tblCustomer.getValueAt(tblCustomer.getSelectedRow(), 0).toString(), payLater,discountPlan );
             } catch (SQLException ex) {
                 Logger.getLogger(customerPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -372,6 +386,11 @@ public class customerPlusPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnUpdateCustomerActionPerformed
 
+    private void txtSearchCustomerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchCustomerKeyReleased
+        // TODO add your handling code here:
+         tblCustomer.setModel(DbUtils.resultSetToTableModel(controller.searchCustomer(txtSearchCustomer.getText())));
+    }//GEN-LAST:event_txtSearchCustomerKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddCustomer;
@@ -379,7 +398,6 @@ public class customerPlusPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbDiscountPlan;
     private java.awt.Checkbox cbPayLater;
     private javax.swing.JPanel customerPanel;
-    private javax.swing.JLabel lblCompanyLogo;
     private javax.swing.JLabel lblCustomerAddress;
     private javax.swing.JLabel lblCustomerName;
     private javax.swing.JLabel lblCustomerPhoneNumber;

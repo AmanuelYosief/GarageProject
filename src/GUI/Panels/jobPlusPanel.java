@@ -20,7 +20,7 @@ public class jobPlusPanel extends javax.swing.JPanel {
      * Creates new form jobPlusPanel
      */
     public jobPlusPanel() {
-     fetchAll();
+     //fetchAll();
     }
     
         public void fetchAll() {
